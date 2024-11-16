@@ -1,0 +1,20 @@
+# 도커로부터 node를 베이스로 이미지 가져오기
+FROM node:20-alpine
+
+# 컨테이너에 실제 워킹 디렉토리를 만들어서 소스코드를 구분
+WORKDIR /main_server/main
+
+# npm install 정상 수행을 위해서 그 전에 컨테이너 내부에 패키지 모듈 명세 파일을 복사
+COPY package.json ./
+
+# 도커 서버가 수행할 커맨드를 추가
+RUN npm install
+
+# package.json 외의 다른 파일들도 복사할 수 있도록 함 
+COPY ./ ./
+
+# 외부로부터 열어줄 포트 설정
+EXPOSE 6000
+
+# 컨테이너가 실행될 때 한 번만 수행되는 커맨드 
+CMD ["npm", "run", "main"]
