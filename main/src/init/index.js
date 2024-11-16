@@ -1,4 +1,7 @@
+import { testAllDBConnection } from '../database/mysql/execute/commands/test.command.js';
+
 const initServer = async () => {
+  testAllDBConnection();
   try {
   } catch (e) {
     console.error(e);

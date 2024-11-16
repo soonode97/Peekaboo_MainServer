@@ -8,6 +8,7 @@ import {
   DB_HOST,
   DB_PASSWORD,
   DB_PORT,
+  DB_USER,
 } from '../constants/env.js';
 
 import {
@@ -31,12 +32,21 @@ export const config = {
     sequenceLength: SEQUENCE_LENGTH,
     payloadLength: PAYLOAD_LENGTH,
   },
-  db: {
-    game_db: DB1_NAME,
-    user_db: DB2_NAME,
-    host: DB_HOST,
-    password: DB_PASSWORD,
-    port: DB_PORT,
+  databases: {
+    USER_DB: {
+      name: DB1_NAME,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      host: DB_HOST,
+      port: DB_PORT,
+    },
+    GAME_DB: {
+      name: DB2_NAME,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      host: DB_HOST,
+      port: DB_PORT,
+    },
   },
   auth: {
     secret_key: SECRET_KEY,
