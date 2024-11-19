@@ -6,6 +6,4 @@ export const PACKET_TYPE = {
   ConnectNotification: 2,
   ConnectGameRequest: 10,
   ConnectGameNotification: 11,
-  MoveRequest: 20,
-  MoveNotification: 21,
 };
