@@ -16,5 +16,10 @@ export const DB_PASSWORD = process.env.DB_PASSWORD || 'peekaboo1234';
 export const DB_HOST = process.env.DB_HOST || '127.0.0.1';
 export const DB_PORT = process.env.DB_PORT || '5000';
 
+// REDIS SERVER
+export const REDIS_HOST = process.env.REDIS_HOST || null;
+export const REDIS_PASSWORD = process.env.REDIS_PASSWORD || null;
+export const REDIS_PORT = process.env.REDIS_PORT || null;
+
 // AUTHENTICATION
 export const SECRET_KEY = process.env.SECRET_KEY;
