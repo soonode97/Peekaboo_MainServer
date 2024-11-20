@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main/src/server.js",
-    "dev": "nodemon main/src/server.js",
+    "main": "node main/src/server.js",
+    "main:dev": "nodemon main/src/server.js",
+    "lobby": "node lobby/src/server.js",
+    "lobby:dev": "nodemon lobby/src/server.js",
     "migrate": "node main/src/database/mysql/execute/migrations/createSchemas.js"
   },
   "keywords": [],

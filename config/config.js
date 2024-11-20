@@ -1,6 +1,7 @@
 import {
   SERVER_HOST,
   MAIN_NET_PORT,
+  LOBBY_NET_PORT,
   CLIENT_VERSION,
   SECRET_KEY,
   DB1_NAME,
@@ -24,7 +25,8 @@ import {
 export const config = {
   server: {
     host: SERVER_HOST,
-    port: MAIN_NET_PORT,
+    mainPort: MAIN_NET_PORT,
+    lobbyPort: LOBBY_NET_PORT,
   },
   client: {
     clientVersion: CLIENT_VERSION,

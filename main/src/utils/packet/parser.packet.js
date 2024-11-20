@@ -1,7 +1,7 @@
-import { getProtoMessages } from '../../init/load.protos.js';
+// import { getProtoMessages } from '../../init/load.protos.js';
 
 const parserPacket = (payload) => {
-  const protoMessages = getProtoMessages();
+  // const protoMessages = getProtoMessages();
 
   const packet = protoMessages.common.GamePacket;
 

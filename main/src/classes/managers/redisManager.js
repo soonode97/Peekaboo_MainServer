@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { config } from '../../config/config.js';
+import { config } from '../../../../config/config.js';
 
 class RedisManager {
   constructor() {
@@ -19,8 +19,6 @@ class RedisManager {
     }
     return RedisManager.instance;
   }
-
-  getClient = () => this.client;
 }
 
 const redis = new RedisManager();
