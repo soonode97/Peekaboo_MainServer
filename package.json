@@ -8,7 +8,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main/src/server.js",
     "dev": "nodemon main/src/server.js",
-    "migrate": "node main/src/database/mysql/execute/migrations/createSchemas.js"
+    "migrate": "node main/src/database/mysql/execute/migrations/createSchemas.js",
+    "distributor": "node src/distributor/distributor.js",
+    "gateway": "node src/gateway/gateway.js",
+    "lobby": "node src/services/lobby/lobby.server.js",
+    "game": "node src/services/game/game.server.js"
   },
   "keywords": [],
   "author": "",
