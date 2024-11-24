@@ -1,4 +1,4 @@
-import { serializerToServer } from '../utils/request/requestToServer.js';
+import { serializerToServer } from '../utils/request/request.server.js';
 import { C2S_RoutePacket } from '../routes/packet.route.js';
 
 export const handleRequestData = (socket, packetType, payloadBuffer) => {
