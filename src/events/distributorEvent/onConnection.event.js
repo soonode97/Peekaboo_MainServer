@@ -12,7 +12,7 @@ const onConnection = (socket) => {
   );
   sendInfo(socket);
   socket.buffer = Buffer.alloc(0);
-  setInterval(sendPing, 2000);
+  // setInterval(sendPing, 2000);
 
   socket.on('data', onData(socket));
   socket.on('end', onEnd(socket));
