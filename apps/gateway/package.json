@@ -1,0 +1,17 @@
+{
+  "name": "gateway",
+  "version": "1.0.0",
+  "description": "게이트웨이 서버",
+  "main": "gateway.js",
+  "type": "module",
+  "scripts": {
+    "build": "node gateway.js",
+    "dev": "node gateway.js"
+  },
+  "dependencies": {
+    "@peekaboo-ssr/config": "*",
+    "@peekaboo-ssr/classes": "*",
+    "@peekaboo-ssr/events": "*",
+    "@peekaboo-ssr/utils": "*"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "account",
+  "version": "1.0.0",
+  "description": "회원서비스 담당 서버",
+  "main": "account.server.js",
+  "type": "module",
+  "scripts": {
+    "build": "node account.server.js",
+    "dev": "node account.server.js"
+  },
+  "dependencies": {
+    "@peekaboo-ssr/config": "*",
+    "@peekaboo-ssr/classes": "*",
+    "@peekaboo-ssr/events": "*",
+    "@peekaboo-ssr/utils": "*"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "distributor:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "gateway:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "lobby:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "account:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false
+    }
+  },
+  "globalDependencies": [".env"]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@peekaboo-ssr/config",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    "./gateway": "./gateway/index.js",
+    "./distributor": "./distributor/index.js",
+    "./lobby": "./lobby/index.js",
+    "./account": "./account/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

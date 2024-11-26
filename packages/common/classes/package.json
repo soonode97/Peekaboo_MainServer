@@ -1,0 +1,9 @@
+{
+  "name": "@peekaboo-ssr/classes",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    "./TcpClient": "./models/tcpClient.class.js",
+    "./TcpServer": "./models/tcpServer.class.js"
+  }
+}

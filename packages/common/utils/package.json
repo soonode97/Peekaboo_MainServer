@@ -1,0 +1,10 @@
+{
+  "name": "@peekaboo-ssr/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./createPacket": "./packet/create.packet.js",
+    "./parsePacket": "./packet/parse.packet.js"
+  }
+}

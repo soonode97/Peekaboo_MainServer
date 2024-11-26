@@ -1,0 +1,17 @@
+{
+  "name": "lobby",
+  "version": "1.0.0",
+  "description": "메인메뉴 로직 담당 서버",
+  "main": "lobby.server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node lobby.server.js",
+    "build": "node lobby.server.js"
+  },
+  "dependencies": {
+    "@peekaboo-ssr/config": "*",
+    "@peekaboo-ssr/classes": "*",
+    "@peekaboo-ssr/events": "*",
+    "@peekaboo-ssr/utils": "*"
+  }
+}

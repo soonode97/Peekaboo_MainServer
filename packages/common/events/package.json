@@ -1,0 +1,8 @@
+{
+  "name": "@peekaboo-ssr/events",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    "./BaseEvent": "./base.events.js"
+  }
+}
