@@ -1,12 +1,12 @@
 {
-  "name": "gateway",
+  "name": "account",
   "version": "1.0.0",
-  "description": "게이트웨이 서버",
-  "main": "gateway.js",
+  "description": "회원서비스 담당 서버",
+  "main": "account.server.js",
   "type": "module",
   "scripts": {
-    "build": "node gateway.js",
-    "dev": "node gateway.js"
+    "build": "node account.server.js",
+    "dev": "node account.server.js"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

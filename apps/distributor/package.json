@@ -6,12 +6,12 @@
   "type": "module",
   "scripts": {
     "build": "node distributor.js",
-    "start": "node distributor.js",
     "dev": "node distributor.js"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",
-    "@peekaboo-ssr/class": "*",
-    "@peekaboo-ssr/handler": "*"
+    "@peekaboo-ssr/classes": "*",
+    "@peekaboo-ssr/events": "*",
+    "@peekaboo-ssr/utils": "*"
   }
 }

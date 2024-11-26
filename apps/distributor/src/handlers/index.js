@@ -1,13 +1,9 @@
-import { config } from '@peekaboo-ssr/config';
-import { pingHandler } from './service/ping.handler.js';
+import config from '@peekaboo-ssr/config/distributor';
 import { registServiceHandler } from './service/registService.handler.js';
 
 const handlers = {
-  [config.packetType.service.RegistServiceRequest]: {
+  [config.CreateServiceRequest]: {
     handler: registServiceHandler,
-  },
-  [config.packetType.service.PingRes]: {
-    handler: pingHandler,
   },
 };
 

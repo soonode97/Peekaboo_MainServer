@@ -1,12 +1,12 @@
 {
-  "name": "gateway",
+  "name": "lobby",
   "version": "1.0.0",
-  "description": "게이트웨이 서버",
-  "main": "gateway.js",
+  "description": "메인메뉴 로직 담당 서버",
+  "main": "lobby.server.js",
   "type": "module",
   "scripts": {
-    "build": "node gateway.js",
-    "dev": "node gateway.js"
+    "dev": "node lobby.server.js",
+    "build": "node lobby.server.js"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

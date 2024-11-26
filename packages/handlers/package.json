@@ -1,8 +1,0 @@
-{
-  "name": "@peekaboo-ssr/handler",
-  "version": "1.0.0",
-  "type": "module",
-  "exports": {
-    "./BaseHandler": "./base.handler.js"
-  }
-}

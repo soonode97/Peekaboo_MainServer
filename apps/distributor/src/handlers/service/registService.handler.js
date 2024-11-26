@@ -1,5 +1,5 @@
-import { sendInfo } from '../../notifications/service.notification.js';
-import { serviceMap } from '../../connections/connection.js';
+import { sendInfo } from '../../notifications/connection.notification.js';
+import { serviceMap } from '../../data/connection.data.js';
 
 export const registServiceHandler = (socket, payload) => {
   const key = socket.remoteAddress + ':' + socket.remotePort;

@@ -17,13 +17,13 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "account:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
     "dev": {
       "cache": false
     }
   },
-  "globalDependencies": [
-    "packages/config/**",
-    "packages/classes/**",
-    "packages/handlers/**"
-  ]
+  "globalDependencies": [".env"]
 }

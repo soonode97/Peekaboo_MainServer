@@ -1,26 +1,65 @@
-import { config } from '@peekaboo-ssr/config';
-import TcpServer from '@peekaboo-ssr/class/TcpServer';
-import TcpClient from '@peekaboo-ssr/class/TcpClient';
-import FromClientHandler from './src/events/fromClient.event.js';
+import TcpServer from '@peekaboo-ssr/classes/TcpServer';
+import TcpClient from '@peekaboo-ssr/classes/TcpClient';
+import C2GEventHandler from './src/events/onC2G.event.js';
+import S2GEventHandler from './src/events/onS2G.event.js';
+import config from '@peekaboo-ssr/config/gateway';
+import { mapClients } from './src/source/router.source.js';
 
 class GatewayServer extends TcpServer {
   constructor() {
     super(
-      'Gateway',
-      config.gatewayServer.host,
-      config.gatewayServer.port,
-      new FromClientHandler(),
+      'gateway',
+      config.gateway.host,
+      config.gateway.port,
+      new C2GEventHandler(),
     );
-    this.mapClients = {};
-    this.mapHosts = {};
-    this.mapResponse = {};
-    this.mapRR = {};
+    this.S2GEventHandler = new S2GEventHandler();
     this.index = 0;
 
-    // this.clientToDistributor = new TcpClient(config.distributor.host, config.distributor.port, (options) => {
-    //   this.isConnectedDistributor = true;
-    //   this.clientToDistributor.write.
-    // });
+    // Distributor랑 연결은 여기서 해결하면 될거같고..
+    this.connectToDistributor(
+      config.distributor.host,
+      config.distributor.port,
+      (data) => {
+        console.log('Distributor Notification: ', data);
+      },
+    );
+  }
+
+  // 각 서비스간 연결이 필요
+  // 게이트웨이 mapClients에 연결된 노드 정보를 저장하는 함수
+  onDistribute(data) {
+    for (let i in data.microservices) {
+      const node = data.microservices[i];
+      const key = node.host + ':' + node.port;
+      if (!mapClients[key] && node.name !== 'gateway') {
+        const client = new TcpClient(
+          node.host,
+          node.port,
+          (options) => {
+            this.S2GEventHandler.onConnection(client);
+          },
+          (options, data) => {
+            this.S2GEventHandler.onData(client, data);
+          },
+          () => {
+            this.S2GEventHandler.onEnd(client);
+          },
+          () => {
+            this.S2GEventHandler.onError(client);
+          },
+        );
+
+        mapClients[key] = {
+          client: client,
+          info: node,
+        };
+
+        client.connect();
+      }
+
+      console.log('mapClients: ', mapClients);
+    }
   }
 }
 

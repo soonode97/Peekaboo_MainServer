@@ -4,11 +4,14 @@
   "type": "module",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/common/*"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "turbo": "^2.3.1"
