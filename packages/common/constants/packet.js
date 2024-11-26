@@ -7,7 +7,7 @@ export const CLIENT_PACKET = {
   },
   lobby: {
     EnterLobbyRequest: 5, // 로비 진입 요청
-    EnterLobbyResponse: 6, // 로비 진입 성공 응답 - 플레이어 정보를 불러와서 보내줌
+    EnterLobbyResponse: 6, // 로비 진입 성공 응답 - 대기실 리스트 정보를 불러와서 보내줌
     UpdateSettingRequest: 7, // 설정 변경 요청
     UpdateSettingResponse: 8, // 설정 변경 저장에 따른 응답 - 추후 프리셋 / 롤백에 대비하여 미리 세팅값 저장
     EnterListOfRoomRequest: 10, // 대기실 리스트 진입 요청
@@ -28,6 +28,33 @@ export const CLIENT_PACKET = {
   },
 };
 
+export const CLIENT_PACKET_MAPS = {
+  [CLIENT_PACKET.account.CreateUserRequest]: 'createUserRequest',
+  [CLIENT_PACKET.account.CreateUserResponse]: 'createUserResponse',
+  [CLIENT_PACKET.account.LoginRequest]: 'loginRequest',
+  [CLIENT_PACKET.account.LoginResponse]: 'loginResponse',
+  [CLIENT_PACKET.lobby.EnterLobbyRequest]: 'enterLobbyRequest',
+  [CLIENT_PACKET.lobby.EnterLobbyResponse]: 'enterLobbyResponse',
+  [CLIENT_PACKET.lobby.UpdateSettingRequest]: 'updateSettingRequest',
+  [CLIENT_PACKET.lobby.UpdateSettingResponse]: 'updateSettingResponse',
+  [CLIENT_PACKET.lobby.EnterListOfRoomRequest]: 'enterListOfRoomRequest',
+  [CLIENT_PACKET.lobby.EnterListOfRoomResponse]: 'enterListOfRoomResponse',
+  [CLIENT_PACKET.lobby.RefreshListOfRoomRequest]: 'refreshListOfRoomRequest',
+  [CLIENT_PACKET.lobby.RefreshListOfRoomResponse]: 'refreshListOfRoomResponse',
+  [CLIENT_PACKET.lobby.FilterRoomByHostUserRequest]:
+    'filterRoomByHostUserRequest',
+  [CLIENT_PACKET.lobby.FilterRoomByHostUserResponse]:
+    'filterRoomByHostUserResponse',
+  [CLIENT_PACKET.lobby.SearchRoomRequest]: 'searchRoomRequest',
+  [CLIENT_PACKET.lobby.SearchRoomResponse]: 'searchRoomResponse',
+  [CLIENT_PACKET.lobby.CreateWaitingRoomRequest]: 'createWaitingRoomRequest',
+  [CLIENT_PACKET.lobby.CreateWaitingRoomResponse]: 'createWaitingRoomResponse',
+  [CLIENT_PACKET.lobby.CreateWaitingRoomNotification]:
+    'createWaitingRoomNotification',
+  [CLIENT_PACKET.lobby.JoinWaitingRoomRequest]: 'joinWaitingRoomRequest',
+  [CLIENT_PACKET.lobby.JoinWaitingRoomResponse]: 'joinWaitingRoomResponse',
+};
+
 export const SERVICE_PACKET = {};
 
 export const DISTRIBUTOR_PACKET = {
@@ -36,10 +63,8 @@ export const DISTRIBUTOR_PACKET = {
   CreatedServiceNotification: 3,
 };
 
-export const PACKET_NAMES = {
+export const packetNames = {
   common: {
     GamePacket: 'common.GamePacket',
   },
 };
-
-export const PACKET_MAPS = {};

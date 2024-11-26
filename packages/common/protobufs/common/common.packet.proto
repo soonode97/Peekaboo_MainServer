@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package common;
+
+message GamePacket {
+  oneof payload {
+    C2S_CreateUserRequest createUserRequest = 1;
+    S2C_CreateUserResponse createUserResponse = 2;
+    C2S_LoginRequest loginRequest = 3;
+    S2C_LoginResponse loginResponse = 4;
+  }
+}

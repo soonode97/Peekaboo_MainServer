@@ -1,4 +1,7 @@
-import { CLIENTS_HEADER, ROUTES_HEADER } from '../../constants/header.js';
+import { CLIENTS_HEADER } from '../../constants/header.js';
+import { CLIENT_PACKET_MAPS } from '../../constants/packet.js';
+import { getProtoMessages } from '../../protobufs/load.protos.js';
+import config from '../../config/shared/index.js';
 
 // 서비스에서 Distributor를 위한 패킷을 만드는 함수
 export const createPacketS2D = (packetType, payload) => {
@@ -35,8 +38,29 @@ export const createPacketG2S = (
   payloadLength,
   payloadBuffer,
 ) => {
-  console.log('0000000000000 서비스를 위한 패킷만들기');
-  // 얘 왜 못하는건데 쓰바
+  const packetTypeBuffer = Buffer.alloc(CLIENTS_HEADER.PACKET_TYPE_LENGTH);
+  packetTypeBuffer.writeUInt16BE(packetType);
+
+  const clientKeyLengthBuffer = Buffer.alloc(CLIENTS_HEADER.CLIENT_KEY_LENGTH);
+  clientKeyLengthBuffer.writeUInt8(clientKey.length);
+
+  const clientKeyBuffer = Buffer.from(clientKey, 'utf-8');
+
+  const payloadLengthBuffer = Buffer.alloc(CLIENTS_HEADER.PAYLOAD_LENGTH);
+  payloadLengthBuffer.writeUInt32BE(payloadLength);
+  console.log('payloadLength: ', payloadLength);
+
+  return Buffer.concat([
+    packetTypeBuffer,
+    clientKeyLengthBuffer,
+    clientKeyBuffer,
+    payloadLengthBuffer,
+    payloadBuffer,
+  ]);
+};
+
+// 서비스에서 게이트를 위한 패킷을 만드는 함수
+export const createPacketS2G = (packetType, clientKey, payloadData = {}) => {
   const packetTypeBuffer = Buffer.alloc(CLIENTS_HEADER.PACKET_TYPE_LENGTH);
   packetTypeBuffer.writeUInt16BE(packetType);
 
@@ -46,7 +70,22 @@ export const createPacketG2S = (
   const clientKeyBuffer = Buffer.from(clientKey);
 
   const payloadLengthBuffer = Buffer.alloc(CLIENTS_HEADER.PAYLOAD_LENGTH);
-  payloadLengthBuffer.writeUInt32BE(payloadLength);
+
+  const protoMessages = getProtoMessages();
+
+  const packet = protoMessages.common.GamePacket;
+
+  const oneOfPayloadData = {};
+  oneOfPayloadData[CLIENT_PACKET_MAPS[packetType]] = payloadData;
+
+  let payloadBuffer;
+  try {
+    payloadBuffer = packet.encode(oneOfPayloadData).finish();
+  } catch (e) {
+    console.error(e);
+  }
+
+  payloadLengthBuffer.writeUInt32BE(payloadBuffer.length);
 
   return Buffer.concat([
     packetTypeBuffer,
@@ -58,26 +97,20 @@ export const createPacketG2S = (
 };
 
 // 게이트에서 Client를 위한 패킷을 만드는 함수
-export const createPacketG2C = (packetType, payloadData = {}, sequence) => {
-  const typeBuffer = Buffer.alloc(config.packet.typeLength);
+export const createPacketG2C = (packetType, payloadBuffer, sequence) => {
+  const typeBuffer = Buffer.alloc(CLIENTS_HEADER.PACKET_TYPE_LENGTH);
   typeBuffer.writeUInt16BE(packetType);
 
-  const versionLengthBuffer = Buffer.alloc(config.packet.versionLength);
-  versionLengthBuffer.writeUint8(CLIENTS_HEADER.clientVersion.length);
+  const versionLengthBuffer = Buffer.alloc(CLIENTS_HEADER.VERSION_LENGTH);
+  versionLengthBuffer.writeUint8(config.version.length);
 
-  const versionString = CLIENTS_HEADER.clientVersion;
+  const versionString = config.version;
   const versionBuffer = Buffer.from(versionString, 'utf-8');
 
-  const sequenceBuffer = Buffer.alloc(config.packet.sequenceLength);
-  sequenceBuffer.writeUInt32BE(sequence);
+  const sequenceBuffer = Buffer.alloc(CLIENTS_HEADER.SEQUENCE_LENGTH);
+  sequenceBuffer.writeUInt32BE(sequence++);
 
-  // const protoMessages = getProtoMessages();
-  // const gamePacket = protoMessages.common.GamePacket;
-  // const responsePayload = {};
-  // responsePayload[PACKET_MAPS[packetType]] = payloadData;
-  // const payloadBuffer = gamePacket.encode(responsePayload).finish();
-
-  const payloadLengthBuffer = Buffer.alloc(config.packet.payloadLength);
+  const payloadLengthBuffer = Buffer.alloc(CLIENTS_HEADER.PAYLOAD_LENGTH);
   payloadLengthBuffer.writeUInt32BE(payloadBuffer.length);
 
   return Buffer.concat([

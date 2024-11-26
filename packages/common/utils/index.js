@@ -3,6 +3,7 @@ export {
   createPacketS2S,
   createPacketG2S,
   createPacketG2C,
+  createPacketS2G,
 } from './packet/create.packet.js';
 
 export {

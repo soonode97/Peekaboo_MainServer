@@ -11,8 +11,8 @@ class C2GEventHandler extends BaseEvent {
     connectSessions.push({
       remote: `${socket.remoteAddress}:${socket.remotePort}`,
       socket: socket,
+      sequence: 1,
     });
-    // console.log(connectSessions);
     socket.buffer = Buffer.alloc(0);
   }
 
@@ -67,8 +67,12 @@ class C2GEventHandler extends BaseEvent {
           offset + payloadLength,
         );
         offset += payloadLength;
-        socket.buffer = socket.buffer.subarray(offset);
-        routeG2SHandler(socket, packetType, payloadLength, payloadBuffer);
+        try {
+          socket.buffer = socket.buffer.subarray(offset);
+          routeG2SHandler(socket, packetType, payloadLength, payloadBuffer);
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
   }

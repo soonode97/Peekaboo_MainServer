@@ -1,6 +1,7 @@
 import config from '@peekaboo-ssr/config/lobby';
 import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
-import { getHandlerByPacketType } from '../handlers.js';
+import { getHandlerByPacketType } from '../handlers/index.js';
+import { parsePacketG2S } from '@peekaboo-ssr/utils';
 
 class G2SEventHandler extends BaseEvent {
   onConnection(socket) {
@@ -14,43 +15,55 @@ class G2SEventHandler extends BaseEvent {
     console.log('Service가 게이트로부터 데이터를 받음..', data);
     socket.buffer = Buffer.concat([socket.buffer, data]);
 
-    while (socket.buffer.length >= config.header.client.typeLength) {
+    while (
+      socket.buffer.length >=
+      config.header.client.typeLength + config.header.client.clientKeyLength
+    ) {
       let offset = 0;
       const packetType = socket.buffer.readUint16BE(offset);
       offset += config.header.client.typeLength;
+      console.log(packetType);
 
       const clientKeyLength = socket.buffer.readUInt8(offset);
       offset += config.header.client.clientKeyLength;
+      console.log(clientKeyLength);
 
-      const clientKey = socket.buffer.subarray(
-        offset,
-        offset + clientKeyLength,
-      );
+      const clientKey = socket.buffer
+        .subarray(offset, offset + clientKeyLength)
+        .toString();
+      console.log(clientKey);
       offset += clientKeyLength;
 
-      const payloadLength = socket.buffer.readUint32BE(offset);
-      offset += config.header.service.payloadLength;
+      const totalHeaderLength =
+        config.header.client.typeLength +
+        config.header.client.clientKeyLength +
+        clientKeyLength;
 
-      const totalPacketLength = offset + payloadLength;
+      if (socket.buffer.length < totalHeaderLength) {
+        break;
+      }
+
+      const payloadLength = socket.buffer.readUint32BE(offset);
+      offset += config.header.client.payloadLength;
+      console.log(payloadLength);
+      const totalPacketLength = totalHeaderLength + payloadLength;
 
       if (socket.buffer.length < totalPacketLength) {
         break;
       }
-      const payload = socket.buffer
-        .subarray(offset, offset + payloadLength)
-        .toString('utf-8');
-
-      socket.buffer = socket.buffer.subarray(totalPacketLength);
-
+      const payloadBuffer = socket.buffer.subarray(
+        offset,
+        offset + payloadLength,
+      );
+      offset += payloadLength;
       try {
-        const payloadObj = JSON.parse(payload);
-
-        console.log(packetType);
-        console.log(payloadObj);
+        console.error('!!!!!', payloadBuffer);
+        const { payload } = parsePacketG2S(payloadBuffer);
+        socket.buffer = socket.buffer.subarray(offset);
 
         const handler = getHandlerByPacketType(packetType);
 
-        await handler(socket, payloadObj, clientKey);
+        await handler(socket, clientKey, payload);
       } catch (e) {
         console.error(e);
       }
