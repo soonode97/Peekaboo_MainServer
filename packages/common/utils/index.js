@@ -9,6 +9,5 @@ export {
 export {
   parsePacketD2S,
   parsePacketS2S,
-  parsePacketC2G,
   parsePacketG2S,
 } from './packet/parse.packet.js';
