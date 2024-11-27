@@ -1,7 +1,5 @@
 export const CLIENT_PACKET = {
   account: {
-    CreateUserRequest: 14,
-    CreateUserResponse: 15,
     LoginRequest: 16,
     LoginResponse: 17, // 응답 성공하면 로비에 진입
   },

@@ -33,9 +33,7 @@ export const parsePacketG2S = (payloadBuffer) => {
       payloadData.hasOwnProperty(key) &&
       typeof payloadData[key] === 'object'
     ) {
-      return {
-        payload: payloadData[key],
-      };
+      return payloadData[key];
     }
   }
 };
