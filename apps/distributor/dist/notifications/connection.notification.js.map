@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/notifications/connection.notification.js"],
+  "sourcesContent": ["import { serviceMap } from '../data/connection.data.js';\r\n\r\nexport const sendInfo = (socket) => {\r\n  const packet = {\r\n    uri: '/distributes',\r\n    method: 'GET',\r\n    key: 0,\r\n    microservices: [],\r\n  };\r\n\r\n  for (let i in serviceMap) {\r\n    packet.microservices.push(serviceMap[i].info);\r\n  }\r\n  // \uC18C\uCF13\uC774 \uC788\uB294 \uACBD\uC6B0 \uC790\uC2E0\uC5D0\uAC8C\uB3C4 \uC815\uBCF4\uB97C \uBCF4\uB0C4\r\n  if (socket) {\r\n    socket.write(JSON.stringify(packet));\r\n  } else {\r\n    // \uB2E4\uB978 \uB9C8\uC774\uD06C\uB85C\uC11C\uBE44\uC2A4\uC5D0\uAC8C\uB3C4 \uC790\uC2E0\uC758 \uC815\uBCF4\uB97C \uBCF4\uB0C4\r\n    for (let j in serviceMap) {\r\n      serviceMap[j].socket.write(JSON.stringify(packet));\r\n    }\r\n  }\r\n};\r\n"],
+  "mappings": "AAAA,SAAS,kBAAkB;AAEpB,MAAM,WAAW,CAAC,WAAW;AAClC,QAAM,SAAS;AAAA,IACb,KAAK;AAAA,IACL,QAAQ;AAAA,IACR,KAAK;AAAA,IACL,eAAe,CAAC;AAAA,EAClB;AAEA,WAAS,KAAK,YAAY;AACxB,WAAO,cAAc,KAAK,WAAW,CAAC,EAAE,IAAI;AAAA,EAC9C;AAEA,MAAI,QAAQ;AACV,WAAO,MAAM,KAAK,UAAU,MAAM,CAAC;AAAA,EACrC,OAAO;AAEL,aAAS,KAAK,YAAY;AACxB,iBAAW,CAAC,EAAE,OAAO,MAAM,KAAK,UAAU,MAAM,CAAC;AAAA,IACnD;AAAA,EACF;AACF;",
+  "names": []
+}

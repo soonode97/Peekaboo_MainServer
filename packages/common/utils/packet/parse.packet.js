@@ -1,6 +1,6 @@
 // proto 파일들을 불러와서 할 수 있도록 할 예정.
 
-import { getProtoMessages } from '../../protobufs/load.protos.js';
+import { getProtoMessages } from '../../../modules/protobufs/load.protos.js';
 
 // Distributor에서 서비스에게 보낸 페이로드에 대해 파싱하기 위한 함수
 export const parsePacketD2S = () => {};

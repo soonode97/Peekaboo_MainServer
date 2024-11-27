@@ -4,25 +4,25 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "distributor:build": {
-      "dependsOn": ["^build"],
+    "distributor:dev": {},
+    "lobby:dev": {
+      "dependsOn": ["distributor:dev"],
       "outputs": ["dist/**"]
     },
-    "gateway:build": {
-      "dependsOn": ["distributor:build"],
+    "account:dev": {
+      "dependsOn": ["lobby:dev"],
       "outputs": ["dist/**"]
     },
-    "lobby:build": {
-      "dependsOn": ["gateway:build"],
-      "outputs": ["dist/**"]
-    },
-    "account:build": {
-      "dependsOn": ["lobby:build"],
+    "gateway:dev": {
+      "dependsOn": ["account:dev"],
       "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false
+    },
+    "start": {
+      "cache": false
     }
   },
-  "globalDependencies": [".env"]
+  "globalDependencies": [".env", "package.json"]
 }

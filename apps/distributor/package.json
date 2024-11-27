@@ -5,8 +5,9 @@
   "main": "distributor.js",
   "type": "module",
   "scripts": {
-    "build": "node distributor.js",
-    "dev": "node distributor.js"
+    "start": "node dist/distributor.js",
+    "build": "node esbuild.config.js",
+    "distributor:dev": "node src/distributor.js"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

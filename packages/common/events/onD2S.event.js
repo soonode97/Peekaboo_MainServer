@@ -1,5 +1,5 @@
 import BaseEvent from './base.events.js';
-import { DISTRIBUTOR_PACKET } from '../constants/packet.js';
+import { DISTRIBUTOR_PACKET } from '../../modules/constants/packet.js';
 import { createPacketS2D } from '../utils/packet/create.packet.js';
 
 class D2SEventHandler extends BaseEvent {

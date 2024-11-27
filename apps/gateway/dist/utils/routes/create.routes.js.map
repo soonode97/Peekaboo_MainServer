@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/routes/create.routes.js"],
+  "sourcesContent": ["// \uB77C\uC6B0\uD305 \uD14C\uC774\uBE14 \uC0DD\uC131 \uD568\uC218\r\nexport const createRoutingTable = (clientPacket) => {\r\n  const routingTable = {};\r\n\r\n  for (const serverName in clientPacket) {\r\n    const packets = clientPacket[serverName];\r\n    for (const packetName in packets) {\r\n      const packetId = packets[packetName];\r\n      routingTable[packetId] = serverName;\r\n    }\r\n  }\r\n  // \uC0DD\uC131\uB41C \uB77C\uC6B0\uD305 \uD14C\uC774\uBE14 \uCD9C\uB825\r\n  console.log(routingTable);\r\n  return routingTable;\r\n};\r\n"],
+  "mappings": "AACO,MAAM,qBAAqB,CAAC,iBAAiB;AAClD,QAAM,eAAe,CAAC;AAEtB,aAAW,cAAc,cAAc;AACrC,UAAM,UAAU,aAAa,UAAU;AACvC,eAAW,cAAc,SAAS;AAChC,YAAM,WAAW,QAAQ,UAAU;AACnC,mBAAa,QAAQ,IAAI;AAAA,IAC3B;AAAA,EACF;AAEA,UAAQ,IAAI,YAAY;AACxB,SAAO;AACT;",
+  "names": []
+}

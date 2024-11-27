@@ -6,7 +6,9 @@ import { sendPacketToClient } from '../utils/response/client.response.js';
 class S2GEventHandler extends BaseEvent {
   onConnection(socket) {
     console.log(
-      `Service connected from: ${socket.remoteAddress}:${socket.remotePort}`,
+      `Service connected from: `,
+      socket.options.host,
+      socket.options.port,
     );
     socket.buffer = Buffer.alloc(0);
   }

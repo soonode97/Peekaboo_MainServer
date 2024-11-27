@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/handlers/index.js"],
+  "sourcesContent": ["import config from '@peekaboo-ssr/config/distributor';\r\nimport { registServiceHandler } from './service/registService.handler.js';\r\n\r\nconst handlers = {\r\n  [config.CreateServiceRequest]: {\r\n    handler: registServiceHandler,\r\n  },\r\n};\r\n\r\nexport const getHandlerByPacketType = (packetType) => {\r\n  if (!handlers[packetType]) {\r\n    return false;\r\n  }\r\n\r\n  return handlers[packetType].handler;\r\n};\r\n"],
+  "mappings": "AAAA,OAAO,YAAY;AACnB,SAAS,4BAA4B;AAErC,MAAM,WAAW;AAAA,EACf,CAAC,OAAO,oBAAoB,GAAG;AAAA,IAC7B,SAAS;AAAA,EACX;AACF;AAEO,MAAM,yBAAyB,CAAC,eAAe;AACpD,MAAI,CAAC,SAAS,UAAU,GAAG;AACzB,WAAO;AAAA,EACT;AAEA,SAAO,SAAS,UAAU,EAAE;AAC9B;",
+  "names": []
+}
