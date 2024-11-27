@@ -25,6 +25,5 @@ export const loginRequestHandler = (socket, clientKey, payload) => {
     clientKey,
     payloadData,
   );
-  console.log(packet);
   socket.write(packet);
 };
