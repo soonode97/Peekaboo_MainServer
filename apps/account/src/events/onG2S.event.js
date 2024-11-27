@@ -58,7 +58,7 @@ class G2SEventHandler extends BaseEvent {
       offset += payloadLength;
       try {
         console.error('!!!!!', payloadBuffer);
-        const { payload } = parsePacketG2S(payloadBuffer);
+        const payload = parsePacketG2S(payloadBuffer);
         socket.buffer = socket.buffer.subarray(offset);
 
         const handler = getHandlerByPacketType(packetType);

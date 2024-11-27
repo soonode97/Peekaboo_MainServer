@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+import "../global/enum.global.proto";
+
+package gameData;
+
+message Position {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Rotation {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message MoveInfo {
+  Position position = 1;
+  Rotation rotation = 2;
+}
+
+message PlayerInfo {
+  string userId = 1;
+  MoveInfo moveInfo = 2;
+  bool isHost = 3;
+}
+
+message PlayerMoveInfo {
+  string userId = 1;
+  Position position = 2;
+  Rotation rotation = 3;
+}
+
+message PlayerStateInfo {
+  string userId = 1;
+  CharacterState characterState = 2;
+}
+
+message GhostInfo {
+  uint32 ghostId = 1;
+  uint32 ghostTypeId = 2;
+  MoveInfo moveInfo = 3;
+}
+
+message GhostMoveInfo {
+  uint32 ghostId = 1;
+  Position position = 2;
+  Rotation rotation = 3;
+}
+
+message GhostStateInfo {
+  uint32 ghostId = 1;
+  CharacterState characterState = 2;
+}
+
+message ItemInfo {
+  uint32 itemId = 1;
+  uint32 itemTypeId = 2;
+}

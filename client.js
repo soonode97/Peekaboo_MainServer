@@ -119,6 +119,28 @@ const createPacket = (packetType, payload) => {
   ]);
 };
 
+const parsePacket = (payload) => {
+  const packet = protoMessages.common.GamePacket;
+
+  let payloadData;
+  try {
+    payloadData = packet.decode(payload);
+  } catch (e) {
+    console.error(e);
+  }
+
+  for (const key in payloadData) {
+    if (
+      payloadData.hasOwnProperty(key) &&
+      typeof payloadData[key] === 'object'
+    ) {
+      return {
+        payload: payloadData[key],
+      };
+    }
+  }
+};
+
 const client = net.connect(gateOptions, () => {
   console.log('연결 완료');
 });
@@ -126,6 +148,36 @@ const client = net.connect(gateOptions, () => {
 // 데이터 수신 처리
 client.on('data', (data) => {
   console.log('받은 데이터: ', data);
+
+  let offset = 0;
+  const packetType = data.readUint16BE(offset);
+  offset += 2;
+
+  const versionLength = data.readUint8(offset);
+  offset += 1;
+
+  const version = data
+    .subarray(offset, offset + versionLength)
+    .toString('utf-8');
+  offset += versionLength;
+
+  const sequence = data.readUint32BE(offset);
+  offset += 4;
+
+  const payloadLength = data.readUint32BE(offset);
+  offset += 4;
+
+  const payloadBuffer = data.subarray(offset, offset + payloadLength);
+  offset += payloadLength;
+  console.log(`packetType: ${packetType}`);
+  console.log(`versionLength: ${versionLength}`);
+  console.log(`sequence: ${sequence}`);
+  console.log(`payloadLength: ${payloadLength}`);
+  console.log(`payloadBuffer: `, payloadBuffer);
+
+  const gamePacket = protoMessages.common.GamePacket;
+  const payloadData = gamePacket.decode(payloadBuffer);
+  console.log(`payload: ${JSON.stringify(payloadData)}`);
 });
 
 // 연결 종료 처리

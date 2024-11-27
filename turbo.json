@@ -9,15 +9,15 @@
       "outputs": ["dist/**"]
     },
     "gateway:build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["distributor:build"],
       "outputs": ["dist/**"]
     },
     "lobby:build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["gateway:build"],
       "outputs": ["dist/**"]
     },
     "account:build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["lobby:build"],
       "outputs": ["dist/**"]
     },
     "dev": {
