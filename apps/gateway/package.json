@@ -5,8 +5,9 @@
   "main": "gateway.js",
   "type": "module",
   "scripts": {
-    "build": "node gateway.js",
-    "dev": "node gateway.js"
+    "start": "node dist/gateway.js",
+    "build": "node esbuild.config.js",
+    "gateway:dev": "node src/gateway.js"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

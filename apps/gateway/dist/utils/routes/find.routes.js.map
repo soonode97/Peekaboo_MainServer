@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/routes/find.routes.js"],
+  "sourcesContent": ["import { routingTable } from '../../source/router.source.js';\r\nimport { mapClients } from '../../source/router.source.js';\r\n\r\nexport const findRouterService = (packetType) => {\r\n  console.log('findRouting...');\r\n  const routingServiceName = routingTable[packetType];\r\n\r\n  for (const [key, value] of Object.entries(mapClients)) {\r\n    // console.log(`\uB77C\uC6B0\uD305 \uD0D0\uC0C9\uC911... ${key} : ${value.info}`);\r\n    if (value.info.name === routingServiceName) {\r\n      // console.log('----\uB77C\uC6B0\uD305\uC11C\uBE44\uC2A4 \uCC3E\uC74C!----');\r\n      return value.client;\r\n    }\r\n  }\r\n};\r\n"],
+  "mappings": "AAAA,SAAS,oBAAoB;AAC7B,SAAS,kBAAkB;AAEpB,MAAM,oBAAoB,CAAC,eAAe;AAC/C,UAAQ,IAAI,gBAAgB;AAC5B,QAAM,qBAAqB,aAAa,UAAU;AAElD,aAAW,CAAC,KAAK,KAAK,KAAK,OAAO,QAAQ,UAAU,GAAG;AAErD,QAAI,MAAM,KAAK,SAAS,oBAAoB;AAE1C,aAAO,MAAM;AAAA,IACf;AAAA,EACF;AACF;",
+  "names": []
+}

@@ -1,5 +1,8 @@
-import { CLIENT_PACKET, SERVICE_PACKET } from '../../constants/packet.js';
-import { ACCOUNT_PORT, EC1_HOST } from '../env.js';
+import {
+  CLIENT_PACKET,
+  SERVICE_PACKET,
+} from '../../../modules/constants/packet.js';
+import { ACCOUNT_PORT, EC1_HOST, SECRET_KEY } from '../env.js';
 import SHARED_CONFIG from '../shared/index.js';
 
 const ACCOUNT_CONFIG = {
@@ -9,6 +12,10 @@ const ACCOUNT_CONFIG = {
   account: {
     host: EC1_HOST,
     port: ACCOUNT_PORT,
+  },
+  jwt: {
+    key: SECRET_KEY,
+    expiresIn: '1h',
   },
 };
 

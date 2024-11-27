@@ -1,6 +1,6 @@
-import { CLIENTS_HEADER } from '../../constants/header.js';
-import { CLIENT_PACKET_MAPS } from '../../constants/packet.js';
-import { getProtoMessages } from '../../protobufs/load.protos.js';
+import { CLIENTS_HEADER } from '../../../modules/constants/header.js';
+import { CLIENT_PACKET_MAPS } from '../../../modules/constants/packet.js';
+import { getProtoMessages } from '../../../modules/protobufs/load.protos.js';
 import config from '../../config/shared/index.js';
 
 // 서비스에서 Distributor를 위한 패킷을 만드는 함수

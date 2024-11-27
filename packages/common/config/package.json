@@ -2,6 +2,9 @@
   "name": "@peekaboo-ssr/config",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "build": "node esbuild.config.js"
+  },
   "exports": {
     "./gateway": "./gateway/index.js",
     "./distributor": "./distributor/index.js",
@@ -9,6 +12,6 @@
     "./account": "./account/index.js"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv-flow": "^4.1.0"
   }
 }

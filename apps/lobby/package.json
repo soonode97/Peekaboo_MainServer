@@ -5,8 +5,9 @@
   "main": "lobby.server.js",
   "type": "module",
   "scripts": {
-    "dev": "node lobby.server.js",
-    "build": "node lobby.server.js"
+    "lobby:dev": "node src/lobby.server.js",
+    "start": "node dist/lobby.server.js",
+    "build": "node esbuild.config.js"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

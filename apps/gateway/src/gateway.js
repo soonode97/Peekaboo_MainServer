@@ -1,9 +1,9 @@
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import TcpClient from '@peekaboo-ssr/classes/TcpClient';
-import C2GEventHandler from './src/events/onC2G.event.js';
-import S2GEventHandler from './src/events/onS2G.event.js';
+import C2GEventHandler from './events/onC2G.event.js';
+import S2GEventHandler from './events/onS2G.event.js';
 import config from '@peekaboo-ssr/config/gateway';
-import { mapClients } from './src/source/router.source.js';
+import { mapClients } from './source/router.source.js';
 
 class GatewayServer extends TcpServer {
   constructor() {
@@ -57,8 +57,6 @@ class GatewayServer extends TcpServer {
 
         client.connect();
       }
-
-      console.log('mapClients: ', mapClients);
     }
   }
 }

@@ -1,4 +1,7 @@
-import { CLIENTS_HEADER, SERVICES_HEADER } from '../../constants/header.js';
+import {
+  CLIENTS_HEADER,
+  SERVICES_HEADER,
+} from '../../../modules/constants/header.js';
 import {
   DB1_NAME,
   DB2_NAME,
@@ -51,6 +54,7 @@ const SHARED_CONFIG = {
       host: DB_HOST,
       port: DB_PORT,
     },
+    SYSTEM_DB: {},
   },
   redis: {
     host: REDIS_HOST,

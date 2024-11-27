@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/distributor.js"],
+  "sourcesContent": ["// \uAC01 \uB9C8\uC774\uD06C\uB85C\uC11C\uBE44\uC2A4\uB97C \uC5F0\uACB0\uD574\uC8FC\uACE0 ip:port \uB97C \uAC8C\uC774\uD2B8\uC6E8\uC774\uC5D0\uAC8C \uBD84\uBC30\uD574\uC8FC\uB294 \uC5ED\uD560\r\nimport TcpServer from '@peekaboo-ssr/classes/TcpServer';\r\nimport config from '@peekaboo-ssr/config/distributor';\r\nimport S2DEventHandler from './events/onS2D.event.js';\r\n\r\nclass Distributor extends TcpServer {\r\n  constructor() {\r\n    super(\r\n      'distributor',\r\n      config.distributor.host,\r\n      config.distributor.port,\r\n      new S2DEventHandler(),\r\n    );\r\n  }\r\n}\r\n\r\nnew Distributor();\r\n"],
+  "mappings": "AACA,OAAO,eAAe;AACtB,OAAO,YAAY;AACnB,OAAO,qBAAqB;AAE5B,MAAM,oBAAoB,UAAU;AAAA,EAClC,cAAc;AACZ;AAAA,MACE;AAAA,MACA,OAAO,YAAY;AAAA,MACnB,OAAO,YAAY;AAAA,MACnB,IAAI,gBAAgB;AAAA,IACtB;AAAA,EACF;AACF;AAEA,IAAI,YAAY;",
+  "names": []
+}

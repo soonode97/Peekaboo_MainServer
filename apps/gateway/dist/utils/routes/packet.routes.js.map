@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/utils/routes/packet.routes.js"],
+  "sourcesContent": ["import { createPacketG2S } from '@peekaboo-ssr/utils';\r\nimport { findRouterService } from './find.routes.js';\r\n\r\nexport const routeG2SHandler = (\r\n  socket,\r\n  packetType,\r\n  payloadLength,\r\n  payloadBuffer,\r\n) => {\r\n  try {\r\n    console.log('----------- \uAC8C\uC774\uD2B8\uAC00 \uD074\uB77C\uC774\uC5B8\uD2B8\uB85C \uB370\uC774\uD130 \uBC1B\uC74C -----------');\r\n    console.log(packetType, payloadLength, payloadBuffer);\r\n    const clientKey = socket.remoteAddress + ':' + socket.remotePort;\r\n    const routeBuffer = createPacketG2S(\r\n      packetType,\r\n      clientKey,\r\n      payloadLength,\r\n      payloadBuffer,\r\n    );\r\n    console.log(routeBuffer);\r\n    const routingClient = findRouterService(packetType);\r\n\r\n    console.log(routingClient);\r\n\r\n    routingClient.write(routeBuffer);\r\n  } catch (e) {\r\n    console.error(e);\r\n  }\r\n};\r\n"],
+  "mappings": "AAAA,SAAS,uBAAuB;AAChC,SAAS,yBAAyB;AAE3B,MAAM,kBAAkB,CAC7B,QACA,YACA,eACA,kBACG;AACH,MAAI;AACF,YAAQ,IAAI,uHAA4C;AACxD,YAAQ,IAAI,YAAY,eAAe,aAAa;AACpD,UAAM,YAAY,OAAO,gBAAgB,MAAM,OAAO;AACtD,UAAM,cAAc;AAAA,MAClB;AAAA,MACA;AAAA,MACA;AAAA,MACA;AAAA,IACF;AACA,YAAQ,IAAI,WAAW;AACvB,UAAM,gBAAgB,kBAAkB,UAAU;AAElD,YAAQ,IAAI,aAAa;AAEzB,kBAAc,MAAM,WAAW;AAAA,EACjC,SAAS,GAAG;AACV,YAAQ,MAAM,CAAC;AAAA,EACjB;AACF;",
+  "names": []
+}

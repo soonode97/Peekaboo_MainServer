@@ -1,5 +1,5 @@
 import SHARED_CONFIG from '../shared/index.js';
-import { DISTRIBUTOR_PACKET } from '../../constants/packet.js';
+import { DISTRIBUTOR_PACKET } from '../../../modules/constants/packet.js';
 
 const DISTRIBUTOR_CONFIG = {
   ...SHARED_CONFIG,

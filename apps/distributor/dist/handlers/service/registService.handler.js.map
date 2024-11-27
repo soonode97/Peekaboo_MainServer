@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/handlers/service/registService.handler.js"],
+  "sourcesContent": ["import { sendInfo } from '../../notifications/connection.notification.js';\r\nimport { serviceMap } from '../../data/connection.data.js';\r\n\r\nexport const registServiceHandler = (socket, payload) => {\r\n  const key = socket.remoteAddress + ':' + socket.remotePort;\r\n  serviceMap[key] = {\r\n    socket: socket,\r\n  };\r\n  serviceMap[key].info = payload;\r\n  sendInfo();\r\n};\r\n"],
+  "mappings": "AAAA,SAAS,gBAAgB;AACzB,SAAS,kBAAkB;AAEpB,MAAM,uBAAuB,CAAC,QAAQ,YAAY;AACvD,QAAM,MAAM,OAAO,gBAAgB,MAAM,OAAO;AAChD,aAAW,GAAG,IAAI;AAAA,IAChB;AAAA,EACF;AACA,aAAW,GAAG,EAAE,OAAO;AACvB,WAAS;AACX;",
+  "names": []
+}

@@ -1,7 +1,11 @@
 {
   "name": "@peekaboo-ssr/utils",
   "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
+  "scripts": {
+    "build": "node esbuild.config.js"
+  },
   "exports": {
     ".": "./index.js",
     "./createPacket": "./packet/create.packet.js",
