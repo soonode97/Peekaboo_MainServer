@@ -2,15 +2,15 @@ import config from '@peekaboo-ssr/config/account';
 import { loginRequestHandler } from './auth/login.handler.js';
 
 const handlers = {
-  [config.clientPacket.account.CreateUserRequest]: {
+  [config.clientPacket.account.LoginRequest]: {
     handler: loginRequestHandler,
   },
 };
 
 export const getHandlerByPacketType = (packetType) => {
-  const handler = handlers[packetType].handler;
-  if (handler) {
-    return handler;
+  if (!handlers[packetType]) {
+    console.error('handler not found!!');
+    return false;
   }
-  console.error(`handler is not found.`);
+  return handlers[packetType].handler;
 };
