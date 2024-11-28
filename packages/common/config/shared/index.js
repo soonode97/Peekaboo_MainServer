@@ -15,6 +15,7 @@ import {
   EC1_HOST,
   DISTRIBUTOR_PORT,
   CLIENT_VERSION,
+  SESSION_PORT,
 } from '../env.js';
 
 const SHARED_CONFIG = {
@@ -22,6 +23,10 @@ const SHARED_CONFIG = {
   distributor: {
     host: EC1_HOST,
     port: DISTRIBUTOR_PORT,
+  },
+  session: {
+    host: EC1_HOST,
+    port: SESSION_PORT,
   },
   header: {
     service: {

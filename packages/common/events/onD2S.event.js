@@ -1,6 +1,6 @@
 import BaseEvent from './base.events.js';
-import { DISTRIBUTOR_PACKET } from '../../modules/constants/packet.js';
-import { createPacketS2D } from '../utils/packet/create.packet.js';
+import { SERVICE_PACKET } from '../../modules/constants/packet.js';
+import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
 
 class D2SEventHandler extends BaseEvent {
   onConnection(server) {
@@ -8,8 +8,8 @@ class D2SEventHandler extends BaseEvent {
       `Distributor connected from: ${server.clientToDistributor.options.host}:${server.clientToDistributor.options.port}`,
     );
     server.isConnectedDistributor = true;
-    const buffer = createPacketS2D(
-      DISTRIBUTOR_PACKET.CreateServiceRequest,
+    const buffer = createPacketS2S(
+      SERVICE_PACKET.CreateServiceRequest,
       server.context,
     );
     server.clientToDistributor.write(buffer);

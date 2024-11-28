@@ -1,9 +1,9 @@
 import SHARED_CONFIG from '../shared/index.js';
-import { DISTRIBUTOR_PACKET } from '../../../modules/constants/packet.js';
+import { SERVICE_PACKET } from '../../../modules/constants/packet.js';
 
 const DISTRIBUTOR_CONFIG = {
   ...SHARED_CONFIG,
-  ...DISTRIBUTOR_PACKET,
+  servicePacket: SERVICE_PACKET,
 };
 
 export default DISTRIBUTOR_CONFIG;

@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node esbuild.config.js"
+    "build": "node esbuild.config.js",
+    "clean": "del-cli dist"
   },
   "exports": {
     "./gateway": "./gateway/index.js",
     "./distributor": "./distributor/index.js",
     "./lobby": "./lobby/index.js",
-    "./account": "./account/index.js"
+    "./account": "./account/index.js",
+    "./session": "./session/index.js"
   },
   "dependencies": {
     "dotenv-flow": "^4.1.0"

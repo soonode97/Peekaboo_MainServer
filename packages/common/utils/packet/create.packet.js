@@ -3,10 +3,29 @@ import { CLIENT_PACKET_MAPS } from '../../../modules/constants/packet.js';
 import { getProtoMessages } from '../../../modules/protobufs/load.protos.js';
 import config from '../../config/shared/index.js';
 
-// 서비스에서 Distributor를 위한 패킷을 만드는 함수
-export const createPacketS2D = (packetType, payload) => {
+// Distributor => 서비스 / 서비스 => Distributor 패킷을 생성하는 함수
+// MSA 서비스 간 패킷을 생성하는 함수로 통일
+export const createPacketS2S = (packetType, payload) => {
+  /**
+   * 서비스 간 패킷 구조
+   *
+   * 음................................................................ .. . .. . . .....
+   * ...... . . . . . .......... . . . .
+   *
+   * 1. 패킷 타입
+   * 2. 보내는 서비스
+   * 3. 받는 서비스
+   * 4. 페이로드 길이
+   * 5. 페이로드
+   *
+   * 보내고 받는 서비스는 길이 유동적으로 안하고 고정하는 방향.. 10자 이내 / 서비스 이름이 길지 않도록 제한 하면 좋을듯
+   * 오키 끝!
+   */
+
+  // payload(JSON)을 일단 문자열로 변환
   const strPayload = JSON.stringify(payload);
 
+  // 2. 보내는 서비스
   const payloadLength = Buffer.byteLength(strPayload);
   const buffer = Buffer.alloc(
     CLIENTS_HEADER.PACKET_TYPE_LENGTH +
@@ -14,7 +33,7 @@ export const createPacketS2D = (packetType, payload) => {
       payloadLength,
   );
   let offset = 0;
-  // packetType 작성
+  // 1. packetType 작성
   buffer.writeUInt16BE(packetType, offset);
   offset += CLIENTS_HEADER.PACKET_TYPE_LENGTH;
 
@@ -27,9 +46,6 @@ export const createPacketS2D = (packetType, payload) => {
 
   return buffer;
 };
-
-// 서비스에서 서비스를 위한 패킷을 만드는 함수
-export const createPacketS2S = () => {};
 
 // 게이트에서 서비스를 위한 패킷을 만드는 함수
 export const createPacketG2S = (

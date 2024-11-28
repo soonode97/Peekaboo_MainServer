@@ -5,8 +5,8 @@
   "main": "lobby.server.js",
   "type": "module",
   "scripts": {
-    "lobby:dev": "node src/lobby.server.js",
-    "start": "node dist/lobby.server.js",
+    "lobby:start": "node dist/lobby.server.js",
+    "dev": "node src/lobby.server.js",
     "build": "node esbuild.config.js",
     "clean": "del-cli dist"
   },

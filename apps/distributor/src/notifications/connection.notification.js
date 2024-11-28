@@ -1,10 +1,9 @@
 import { serviceMap } from '../data/connection.data.js';
+import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
 
 export const sendInfo = (socket) => {
+  // createPacketS2S 용 정의가 필요하고 사용해서 패킷 보낼 수 있도록 해야 함.
   const packet = {
-    uri: '/distributes',
-    method: 'GET',
-    key: 0,
     microservices: [],
   };
 

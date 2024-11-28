@@ -1,5 +1,4 @@
 export {
-  createPacketS2D,
   createPacketS2S,
   createPacketG2S,
   createPacketG2C,

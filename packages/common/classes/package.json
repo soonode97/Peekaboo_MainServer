@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node esbuild.config.js"
+    "build": "node esbuild.config.js",
+    "clean": "del-cli dist"
   },
   "exports": {
     "./TcpClient": "./models/tcpClient.class.js",
