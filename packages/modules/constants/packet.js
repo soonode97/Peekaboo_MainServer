@@ -53,9 +53,7 @@ export const CLIENT_PACKET_MAPS = {
   // [CLIENT_PACKET.lobby.JoinWaitingRoomResponse]: 'joinWaitingRoomResponse',
 };
 
-export const SERVICE_PACKET = {};
-
-export const DISTRIBUTOR_PACKET = {
+export const SERVICE_PACKET = {
   CreateServiceRequest: 1,
   CreateServiceResponse: 2,
   CreatedServiceNotification: 3,

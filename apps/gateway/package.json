@@ -2,12 +2,12 @@
   "name": "gateway",
   "version": "1.0.0",
   "description": "게이트웨이 서버",
-  "main": "gateway.js",
+  "main": "gateway.server.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/gateway.js",
+    "gateway:start": "node dist/gateway.server.js",
+    "dev": "node src/gateway.server.js",
     "build": "node esbuild.config.js",
-    "gateway:dev": "node src/gateway.js",
     "clean": "del-cli dist"
   },
   "dependencies": {

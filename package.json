@@ -7,9 +7,9 @@
     "packages/common/*"
   ],
   "scripts": {
-    "start": "turbo run start",
+    "start": "turbo run gateway:start",
+    "dev": "turbo run dev",
     "build": "turbo run build",
-    "dev": "turbo run gateway:dev",
     "clean": "turbo run clean"
   },
   "dependencies": {

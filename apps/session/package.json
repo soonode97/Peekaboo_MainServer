@@ -1,12 +1,12 @@
 {
-  "name": "distributor",
+  "name": "session",
   "version": "1.0.0",
-  "description": "각 서버의 위치 정보를 저장하고 알려주는 서버",
-  "main": "distributor.js",
+  "description": "세션 담당 서버",
+  "main": "session.server.js",
   "type": "module",
   "scripts": {
-    "distributor:start": "node dist/distributor.js",
-    "dev": "node src/distributor.js",
+    "session:start": "node dist/session.server.js",
+    "dev": "node src/session.server.js",
     "build": "node esbuild.config.js",
     "clean": "del-cli dist"
   },

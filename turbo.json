@@ -1,26 +1,27 @@
 {
   "tasks": {
+    "distributor:start": {},
+    "lobby:start": {
+      "dependsOn": ["distributor:start"],
+      "outputs": ["dist/**"]
+    },
+    "account:start": {
+      "dependsOn": ["lobby:start"],
+      "outputs": ["dist/**"]
+    },
+    "session:start": {
+      "dependsOn": ["account:start"],
+      "outputs": ["dist/**"]
+    },
+    "gateway:start": {
+      "dependsOn": ["session:start"],
+      "outputs": ["dist/**"]
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "distributor:dev": {},
-    "lobby:dev": {
-      "dependsOn": ["distributor:dev"],
-      "outputs": ["dist/**"]
-    },
-    "account:dev": {
-      "dependsOn": ["lobby:dev"],
-      "outputs": ["dist/**"]
-    },
-    "gateway:dev": {
-      "dependsOn": ["account:dev"],
-      "outputs": ["dist/**"]
-    },
     "dev": {
-      "cache": false
-    },
-    "start": {
       "cache": false
     },
     "clean": {

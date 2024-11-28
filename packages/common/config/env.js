@@ -17,6 +17,7 @@ export const LOBBY_PORT = process.env.LOBBY_PORT || '6000';
 export const ACCOUNT_PORT = process.env.ACCOUNT_PORT || '6100';
 export const DISTRIBUTOR_PORT = process.env.DISTRIBUTOR_PORT || '6200';
 export const GATEWAY_PORT = process.env.GATEWAY_PORT || '6300';
+export const SESSION_PORT = process.env.SESSION_PORT || '6400';
 
 // CLIENT
 export const CLIENT_VERSION = process.env.CLIENT_VERSION || '1.0.0';

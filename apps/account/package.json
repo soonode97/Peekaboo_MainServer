@@ -5,9 +5,9 @@
   "main": "account.server.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/account.server.js",
+    "account:start": "node dist/account.server.js",
+    "dev": "node src/account.server.js",
     "build": "node esbuild.config.js",
-    "account:dev": "node src/account.server.js",
     "clean": "del-cli dist"
   },
   "dependencies": {
