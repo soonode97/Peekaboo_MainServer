@@ -11,5 +11,6 @@ esbuild
     minify: false, // 압축 여부
     sourcemap: true, // 소스맵 생성
     target: ['node16'], // 타겟 Node.js 버전
+    allowOverwrite: true,
   })
   .catch(() => process.exit(1));

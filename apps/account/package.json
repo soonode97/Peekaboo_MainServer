@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node dist/account.server.js",
     "build": "node esbuild.config.js",
-    "account:dev": "node src/account.server.js"
+    "account:dev": "node src/account.server.js",
+    "clean": "del-cli dist"
   },
   "dependencies": {
     "@peekaboo-ssr/classes": "*",

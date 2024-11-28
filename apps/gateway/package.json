@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node dist/gateway.js",
     "build": "node esbuild.config.js",
-    "gateway:dev": "node src/gateway.js"
+    "gateway:dev": "node src/gateway.js",
+    "clean": "del-cli dist"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

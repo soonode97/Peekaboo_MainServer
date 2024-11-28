@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/source/router.source.js"],
-  "sourcesContent": ["import { createRoutingTable } from '../utils/routes/create.routes.js';\r\nimport config from '@peekaboo-ssr/config/gateway';\r\n\r\nexport const mapClients = {};\r\nexport const mapResponse = {}; // \uCC98\uB9AC\uD574\uC57C\uD560 \uC751\uB2F5\uAC12\uB4E4 \uB2F4\uB294 \uACF5\uAC04 (mapResponse => \uC21C\uC11C\uC81C\uC5B4)\r\nexport const mapRR = {}; // \uB85C\uB4DC\uBC38\uB7F0\uC2F1 \uB77C\uC6B4\uB4DC\uB85C\uBE48 (\uC0AC\uC2E4\uC0C1 \uC758\uBBF8 \uC5C6\uC74C \uD558\uC9C0\uB9CC \uB123\uC5B4\uC904\uC21C\uC788\uC74C..)\r\nexport const routingTable = createRoutingTable(config.clientPacket);\r\n"],
-  "mappings": "AAAA,SAAS,0BAA0B;AACnC,OAAO,YAAY;AAEZ,MAAM,aAAa,CAAC;AACpB,MAAM,cAAc,CAAC;AACrB,MAAM,QAAQ,CAAC;AACf,MAAM,eAAe,mBAAmB,OAAO,YAAY;",
-  "names": []
-}

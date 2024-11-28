@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../src/handlers/service/ping.handler.js"],
-  "sourcesContent": ["export const pingHandler = (socket, payload) => {\r\n  console.log(payload);\r\n};\r\n"],
-  "mappings": "AAAO,MAAM,cAAc,CAAC,QAAQ,YAAY;AAC9C,UAAQ,IAAI,OAAO;AACrB;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/sessions/sessions.js"],
-  "sourcesContent": ["export const connectSessions = [];\r\n\r\nexport const getSocketByRemote = (remote) => {\r\n  const session = connectSessions.find(\r\n    (connection) => connection.remote == remote,\r\n  );\r\n  return session.socket;\r\n};\r\n"],
-  "mappings": "AAAO,MAAM,kBAAkB,CAAC;AAEzB,MAAM,oBAAoB,CAAC,WAAW;AAC3C,QAAM,UAAU,gBAAgB;AAAA,IAC9B,CAAC,eAAe,WAAW,UAAU;AAAA,EACvC;AACA,SAAO,QAAQ;AACjB;",
-  "names": []
-}

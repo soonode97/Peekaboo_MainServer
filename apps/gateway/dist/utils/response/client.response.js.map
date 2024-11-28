@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../src/utils/response/client.response.js"],
-  "sourcesContent": ["import { createPacketG2C } from '@peekaboo-ssr/utils';\r\n\r\n// \uD074\uB77C\uC774\uC5B8\uD2B8\uC5D0 \uD328\uD0B7\uC744 \uBCF4\uB0B4\uC8FC\uB294 \uD568\uC218\r\nexport const sendPacketToClient = (packetType, client, payloadBuffer) => {\r\n  const packet = createPacketG2C(packetType, payloadBuffer, client.sequence);\r\n\r\n  console.log('\uBCF4\uB0BC \uBC84\uD37C: ', packet);\r\n  client.write(packet);\r\n};\r\n"],
-  "mappings": "AAAA,SAAS,uBAAuB;AAGzB,MAAM,qBAAqB,CAAC,YAAY,QAAQ,kBAAkB;AACvE,QAAM,SAAS,gBAAgB,YAAY,eAAe,OAAO,QAAQ;AAEzE,UAAQ,IAAI,+BAAW,MAAM;AAC7B,SAAO,MAAM,MAAM;AACrB;",
-  "names": []
-}

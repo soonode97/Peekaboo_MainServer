@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node dist/distributor.js",
     "build": "node esbuild.config.js",
-    "distributor:dev": "node src/distributor.js"
+    "distributor:dev": "node src/distributor.js",
+    "clean": "del-cli dist"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

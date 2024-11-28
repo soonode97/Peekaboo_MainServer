@@ -7,7 +7,8 @@
   "scripts": {
     "lobby:dev": "node src/lobby.server.js",
     "start": "node dist/lobby.server.js",
-    "build": "node esbuild.config.js"
+    "build": "node esbuild.config.js",
+    "clean": "del-cli dist"
   },
   "dependencies": {
     "@peekaboo-ssr/config": "*",

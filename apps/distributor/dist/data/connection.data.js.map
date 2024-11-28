@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../src/data/connection.data.js"],
-  "sourcesContent": ["// Distributor\uC5D0 \uC5F0\uACB0\uB41C \uC11C\uBE44\uC2A4\uB97C \uB2F4\uB294 \uB9F5 \uAC1D\uCCB4\r\nexport const serviceMap = {};\r\n"],
-  "mappings": "AACO,MAAM,aAAa,CAAC;",
-  "names": []
-}
