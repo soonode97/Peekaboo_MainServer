@@ -1,22 +1,36 @@
-import { serviceMap } from '../data/connection.data.js';
+import { serviceMap } from '../source/connection.source.js';
 import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
+import config from '@peekaboo-ssr/config/distributor';
 
-export const sendInfo = (socket) => {
-  // createPacketS2S 용 정의가 필요하고 사용해서 패킷 보낼 수 있도록 해야 함.
+export const sendInfo = (socket = null, message) => {
   const packet = {
     microservices: [],
+    message,
   };
 
   for (let i in serviceMap) {
     packet.microservices.push(serviceMap[i].info);
   }
-  // 소켓이 있는 경우 자신에게도 정보를 보냄
+
+  // 소켓이 있는 경우 자신에게 정보를 보냄
   if (socket) {
-    socket.write(JSON.stringify(packet));
+    const payload = createPacketS2S(
+      config.servicePacket.CreatedServiceNotification,
+      'distributor',
+      'self', // 아 이거 본인 어떻게 가르키지...
+      packet,
+    );
+    socket.write(payload);
   } else {
-    // 다른 마이크로서비스에게도 자신의 정보를 보냄
+    // 아니라면 마이크로서비스에게 자신의 정보를 보냄
     for (let j in serviceMap) {
-      serviceMap[j].socket.write(JSON.stringify(packet));
+      const payload = createPacketS2S(
+        config.servicePacket.CreatedServiceNotification,
+        'distributor',
+        serviceMap[j].info.name,
+        packet,
+      );
+      serviceMap[j].socket.write(payload);
     }
   }
 };

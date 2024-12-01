@@ -2,7 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import protobuf from 'protobufjs';
-import { packetNames } from '../constants/packet.js';
+
+export const packetNames = {
+  common: {
+    GamePacket: 'common.GamePacket',
+    ServicePacket: 'common.ServicePacket',
+  },
+};
 
 // 현재 디렉토리로 루트를 잡음
 const __filename = fileURLToPath(import.meta.url);

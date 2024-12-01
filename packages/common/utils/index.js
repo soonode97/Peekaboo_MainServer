@@ -5,8 +5,4 @@ export {
   createPacketS2G,
 } from './packet/create.packet.js';
 
-export {
-  parsePacketD2S,
-  parsePacketS2S,
-  parsePacketG2S,
-} from './packet/parse.packet.js';
+export { parsePacketS2S, parsePacketG2S } from './packet/parse.packet.js';

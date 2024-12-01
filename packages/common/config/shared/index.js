@@ -33,6 +33,8 @@ const SHARED_CONFIG = {
       totalHeaderLength: SERVICES_HEADER.TOTAL_HEADER_LENGTH,
       typeLength: SERVICES_HEADER.PACKET_TYPE_LENGTH,
       payloadLength: SERVICES_HEADER.PAYLOAD_LENGTH,
+      senderLength: SERVICES_HEADER.SENDER_LENGTH,
+      receiverLength: SERVICES_HEADER.RECEIVER_LENGTH,
     },
     client: {
       totalHeaderLengthExceptVersion:

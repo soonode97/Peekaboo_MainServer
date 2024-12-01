@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "node esbuild.config.js",
-    "clean": "del-cli dist"
+    "build": "node esbuild.config.js"
   },
   "exports": {
     "./gateway": "./gateway/index.js",

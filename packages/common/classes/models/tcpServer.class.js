@@ -46,11 +46,11 @@ class TcpServer {
   // Distributor에 접속하는 함수
   // Distributor에 본인(노드)를 추가
   // 인자로 distributor의 host, port 를 받아옴
-  connectToDistributor(host, port, onNoti) {
+  connectToDistributor(host, port, notification) {
     this.clientToDistributor = new TcpClient(
       host,
       port,
-      () => {
+      (options) => {
         this.onD2SEvent.onConnection(this);
       },
       (options, data) => {
