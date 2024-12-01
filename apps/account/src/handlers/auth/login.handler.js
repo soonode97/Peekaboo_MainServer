@@ -1,12 +1,17 @@
 import config from '@peekaboo-ssr/config/account';
-import { createPacketS2G } from '@peekaboo-ssr/utils';
+import { createPacketS2G, createPacketS2S } from '@peekaboo-ssr/utils';
 import databaseManager from '@peekaboo-ssr/classes/DatabaseManager';
 import userCommands from '@peekaboo-ssr/commands/userCommands';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
-export const loginRequestHandler = async (socket, clientKey, payload) => {
+export const loginRequestHandler = async (
+  socket,
+  clientKey,
+  payload,
+  distributorClient,
+) => {
   try {
     const { id, password } = payload;
     // DB 검증, ID / PASSWORD 검증
@@ -42,22 +47,34 @@ export const loginRequestHandler = async (socket, clientKey, payload) => {
       expiresIn: config.jwt.expiresIn,
     });
 
-    // globalFailCode, userId, token 을 payload로 만듦
+    // 세션 서비스에 보낼 유저 등록 페이로드
+    const payloadDataForService = {
+      uuid: userId,
+      type: 'user',
+    };
 
-    const payloadData = {
+    const packetForService = createPacketS2S(
+      config.servicePacket.JoinSessionRequest,
+      'account',
+      'session',
+      payloadDataForService,
+    );
+
+    distributorClient.write(packetForService);
+
+    // 클라이언트에 보낼 페이로드
+    const payloadDataForClient = {
       globalFailCode: 0,
       userId,
       token,
     };
 
-    // 세션 서비스에 유저를 등록
-
-    const packet = createPacketS2G(
+    const packetForClient = createPacketS2G(
       config.clientPacket.account.LoginResponse,
       clientKey,
-      payloadData,
+      payloadDataForClient,
     );
-    socket.write(packet);
+    socket.write(packetForClient);
   } catch (e) {
     console.error(e);
   }

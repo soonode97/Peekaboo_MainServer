@@ -1,7 +1,7 @@
 // 로비 서버
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/session';
-import S2SEventHandler from './events/onS2S.event.js';
+import G2SEventHandler from './events/onG2S.event.js';
 
 class SessionServer extends TcpServer {
   constructor() {
@@ -9,8 +9,10 @@ class SessionServer extends TcpServer {
       'session',
       config.session.host,
       config.session.port,
-      new S2SEventHandler(),
+      new G2SEventHandler(),
     );
+
+    this.sessions = {};
 
     this.connectToDistributor(
       config.distributor.host,
@@ -20,6 +22,10 @@ class SessionServer extends TcpServer {
         console.log('Distributor Notification: ', data);
       },
     );
+  }
+
+  getSessionsByType(type) {
+    return this.sessions[type];
   }
 }
 

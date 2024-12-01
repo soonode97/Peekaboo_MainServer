@@ -1,13 +1,9 @@
 import config from '@peekaboo-ssr/config/distributor';
-import { registServiceHandler } from './service/registService.handler.js';
-import { joinUserHandler } from './session/session.handler.js';
+import { connectServiceHandler } from './service/registService.handler.js';
 
 const handlers = {
-  [config.servicePacket.CreateServiceRequest]: {
-    handler: registServiceHandler,
-  },
-  [config.servicePacket.joinUserHandler]: {
-    handler: joinUserHandler,
+  [config.servicePacket.ConnectServiceRequest]: {
+    handler: connectServiceHandler,
   },
 };
 

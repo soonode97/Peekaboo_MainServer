@@ -16,7 +16,7 @@ export const sendInfo = (socket = null) => {
   if (socket && socket !== null) {
     packet.message = '기존 서비스 알림';
     const payload = createPacketS2S(
-      config.servicePacket.CreatedServiceNotification,
+      config.servicePacket.ConnectedServiceNotification,
       'distributor',
       'self', // 아 이거 본인 어떻게 가르키지...
       packet,
@@ -27,7 +27,7 @@ export const sendInfo = (socket = null) => {
     for (let j in serviceMap) {
       packet.message = '서비스 변동 알림';
       const payload = createPacketS2S(
-        config.servicePacket.CreatedServiceNotification,
+        config.servicePacket.ConnectedServiceNotification,
         'distributor',
         serviceMap[j].info.name,
         packet,

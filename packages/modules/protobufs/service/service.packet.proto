@@ -4,45 +4,45 @@ import './service.data.proto';
 
 package service;
 
-message CreateServiceRequest {
+message ConnectServiceRequest {
   string host = 1;
   string port = 2;
   string name = 3;
 }
 
-message CreatedServiceNotification {
+message ConnectedServiceNotification {
   repeated Microservices microservices = 1;
   string message = 2;
 }
 
-message DeleteServiceRequest {
+message DisconnectServiceRequest {
   string host = 1;
   string port = 2;
   string name = 3;
 }
 
-message DeleteServiceNotification {
+message DisconnectedServiceNotification {
   string host = 1;
   string port = 2;
   string message =3;
 }
 
-message JoinUserSessionRequest {
+message JoinSessionRequest {
   string uuid = 1;
-  uint32 typeId = 2;
+  string type = 2;
 }
 
-message JoinUserSessionResponse {
+message JoinSessionResponse {
   string uuid = 1;
   string message = 2;
 }
 
-message ExitUserSessionRequest {
+message ExitSessionRequest {
   string uuid = 1;
-  uint32 typeId = 2;
+  string type = 2;
 }
 
-message ExitUserSessionResponse {
+message ExitSessionResponse {
   string uuid = 1;
   string message = 2; 
 }
