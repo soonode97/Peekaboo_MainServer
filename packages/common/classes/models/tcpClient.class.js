@@ -87,6 +87,8 @@ class TcpClient {
             receiver,
             payload,
           };
+
+          console.log('jsonData: ', jsonData);
           this.onRead(this.options, jsonData);
         } catch (e) {
           console.error(e);
