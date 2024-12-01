@@ -1,6 +1,7 @@
 import BaseEvent from './base.events.js';
-import { SERVICE_PACKET } from '../../modules/constants/packet.js';
+import { SERVICE_PACKET } from '../../modules/constants/packet/service.packet.js';
 import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
+import { getHandlerByPacketType } from '../../handlers/index.js';
 
 class D2SEventHandler extends BaseEvent {
   onConnection(server) {
@@ -8,20 +9,26 @@ class D2SEventHandler extends BaseEvent {
       `Distributor connected from: ${server.clientToDistributor.options.host}:${server.clientToDistributor.options.port}`,
     );
     server.isConnectedDistributor = true;
+    console.log('이거 서비스 이름: ', server.context.name);
+
+    // 서비스가 Distributor와 연결되었을 때 등록 요청을 보냄
+    const registPacket = {
+      host: server.context.host,
+      port: server.context.port,
+      name: server.context.name,
+    };
     const buffer = createPacketS2S(
       SERVICE_PACKET.CreateServiceRequest,
-      server.context,
+      server.context.name,
+      'distributor',
+      registPacket,
     );
     server.clientToDistributor.write(buffer);
   }
 
-  // 여기는 추후 데이터 어떤 방식으로 송수신할건지 정의되면 바뀔 수 있음.
-  onData(server, data) {
-    const parsedData = JSON.parse(data);
-    if (server.context.name === 'gateway') {
-      server.onDistribute(parsedData);
-    }
-    console.log('Distributor data: ', parsedData);
+  async onData(server, data) {
+    const handler = getHandlerByPacketType(data.packetType);
+    await handler(server, data);
   }
 
   onEnd(server) {

@@ -52,7 +52,7 @@ export const loginRequestHandler = async (socket, clientKey, payload) => {
       token,
     };
 
-    // ****** 세션을 관리하는 서버를 만들자.
+    // 세션 서비스에 유저를 등록
 
     const packet = createPacketS2G(
       config.clientPacket.account.LoginResponse,

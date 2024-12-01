@@ -46,3 +46,16 @@ message GamePacket {
     S2C_DisconnectPlayerNotification disconnectPlayerNotification = 43;
   }
 }
+
+message ServicePacket {
+  oneof payload {
+    CreateServiceRequest createServiceRequest = 1;
+    CreatedServiceNotification createdServiceNotification = 2;
+    DeleteServiceRequest deleteServiceRequest = 3;
+    DeleteServiceNotification deleteServiceNotification = 4;
+    JoinUserSessionRequest joinUserSessionRequest = 5;
+    JoinUserSessionResponse joinUserSessionResponse = 6;
+    ExitUserSessionRequest exitUserSessionRequest = 7;
+    ExitUserSessionResponse exitUserSessionResponse = 8;
+  }
+}

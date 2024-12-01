@@ -4,8 +4,14 @@ import fs from 'fs';
 import path from 'path';
 import protobuf from 'protobufjs';
 import { fileURLToPath } from 'url';
-import { packetNames } from './packages/common/constants/packet.js';
-import { CLIENT_PACKET_MAPS } from './packages/common/constants/packet.js';
+import { CLIENT_PACKET_MAPS } from './packages/modules/constants/packet/client.packet.js';
+
+export const packetNames = {
+  common: {
+    GamePacket: 'common.GamePacket',
+    ServicePacket: 'common.ServicePacket',
+  },
+};
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

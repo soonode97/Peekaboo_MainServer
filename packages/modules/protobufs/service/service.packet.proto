@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import './service.data.proto';
+
+package service;
+
+message CreateServiceRequest {
+  string host = 1;
+  string port = 2;
+  string name = 3;
+}
+
+message CreatedServiceNotification {
+  repeated Microservices microservices = 1;
+  string message = 2;
+}
+
+message DeleteServiceRequest {
+  string host = 1;
+  string port = 2;
+  string name = 3;
+}
+
+message DeleteServiceNotification {
+  string host = 1;
+  string port = 2;
+  string message =3;
+}
+
+message JoinUserSessionRequest {
+  string uuid = 1;
+  uint32 typeId = 2;
+}
+
+message JoinUserSessionResponse {
+  string uuid = 1;
+  string message = 2;
+}
+
+message ExitUserSessionRequest {
+  string uuid = 1;
+  uint32 typeId = 2;
+}
+
+message ExitUserSessionResponse {
+  string uuid = 1;
+  string message = 2; 
+}

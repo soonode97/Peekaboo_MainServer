@@ -193,9 +193,3 @@ message S2C_ExtractSoulNotification {
 message S2C_DisconnectPlayerNotification {
   string userId = 1;
 }
-
-message S2C_ConnectResponse {
-  string userId = 1;
-  string token = 2;
-  GlobalFailCode globalFailCode = 3;
-}

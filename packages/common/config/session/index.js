@@ -1,4 +1,4 @@
-import { SERVICE_PACKET } from '../../../modules/constants/packet.js';
+import { SERVICE_PACKET } from '../../../modules/constants/packet/service.packet.js';
 import { EC1_HOST, SESSION_PORT } from '../env.js';
 import SHARED_CONFIG from '../shared/index.js';
 

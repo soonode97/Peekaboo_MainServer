@@ -2,14 +2,15 @@ import config from '@peekaboo-ssr/config/distributor';
 import { getHandlerByPacketType } from '../handlers/index.js';
 import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
 import { sendInfo } from '../notifications/connection.notification.js';
-import { serviceMap } from '../data/connection.data.js';
+import { serviceMap } from '../source/connection.source.js';
+import { parsePacketS2S } from '@peekaboo-ssr/utils/parsePacket';
 
 class S2DEventHandler extends BaseEvent {
   onConnection(socket) {
     console.log(
       `Client connected from: ${socket.remoteAddress}:${socket.remotePort}`,
     );
-    sendInfo(socket);
+    sendInfo(socket, '새로운 서비스가 등록되었습니다.');
     socket.buffer = Buffer.alloc(0);
   }
 
@@ -22,28 +23,47 @@ class S2DEventHandler extends BaseEvent {
       const packetType = socket.buffer.readUint16BE(offset);
       offset += config.header.service.typeLength;
 
+      const senderLength = socket.buffer.readUInt8(offset);
+      offset += config.header.service.senderLength;
+
+      const sender = socket.buffer
+        .subarray(offset, offset + senderLength)
+        .toString();
+      offset += senderLength;
+
+      const receiverLength = socket.buffer.readUInt8(offset);
+      offset += config.header.service.receiverLength;
+
+      const receiver = socket.buffer
+        .subarray(offset, offset + receiverLength)
+        .toString();
+      offset += receiverLength;
+
       const payloadLength = socket.buffer.readUint32BE(offset);
       offset += config.header.service.payloadLength;
+
+      console.log(sender, receiver);
 
       const totalPacketLength = offset + payloadLength;
 
       if (socket.buffer.length < totalPacketLength) {
         break;
       }
-      const payload = socket.buffer
-        .subarray(offset, offset + payloadLength)
-        .toString('utf-8');
+      const payloadBuffer = socket.buffer.subarray(
+        offset,
+        offset + payloadLength,
+      );
 
       socket.buffer = socket.buffer.subarray(totalPacketLength);
 
       try {
-        const payloadObj = JSON.parse(payload);
-
         console.log(packetType);
 
         const handler = getHandlerByPacketType(packetType);
 
-        await handler(socket, payloadObj);
+        const payload = parsePacketS2S(payloadBuffer);
+
+        await handler(socket, payload);
       } catch (e) {
         console.error(e);
         process.exit(1);
