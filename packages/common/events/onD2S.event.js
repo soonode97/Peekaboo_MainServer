@@ -19,7 +19,7 @@ class D2SEventHandler extends BaseEvent {
       name: server.context.name,
     };
     const buffer = createPacketS2S(
-      SERVICE_PACKET.CreateServiceRequest,
+      SERVICE_PACKET.ConnectServiceRequest,
       server.context.name,
       'distributor',
       registPacket,
@@ -82,7 +82,6 @@ class D2SEventHandler extends BaseEvent {
         await handler(server, payload);
       } catch (e) {
         console.error(e);
-        process.exit(1);
       }
     }
   }

@@ -49,13 +49,13 @@ message GamePacket {
 
 message ServicePacket {
   oneof payload {
-    CreateServiceRequest createServiceRequest = 1;
-    CreatedServiceNotification createdServiceNotification = 2;
-    DeleteServiceRequest deleteServiceRequest = 3;
-    DeleteServiceNotification deleteServiceNotification = 4;
-    JoinUserSessionRequest joinUserSessionRequest = 5;
-    JoinUserSessionResponse joinUserSessionResponse = 6;
-    ExitUserSessionRequest exitUserSessionRequest = 7;
-    ExitUserSessionResponse exitUserSessionResponse = 8;
+    ConnectServiceRequest connectServiceRequest = 1;
+    ConnectedServiceNotification connectedServiceNotification = 2;
+    DisconnectServiceRequest disconnectServiceRequest = 3;
+    DisconnectedServiceNotification disconnectedServiceNotification = 4;
+    JoinSessionRequest joinSessionRequest = 5;
+    JoinSessionResponse joinSessionResponse = 6;
+    ExitSessionRequest exitSessionRequest = 7;
+    ExitSessionResponse exitSessionResponse = 8;
   }
 }

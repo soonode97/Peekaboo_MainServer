@@ -1,9 +1,13 @@
 import { SERVICE_PACKET } from '../constants/packet/service.packet.js';
-import { createServiceNotificationHandler } from './service/createService.handler.js';
+import { connectedServiceNotificationHandler } from './connection/connectService.handler.js';
+import { joinSessionHandler } from './session/joinSession.handler.js';
 
 export const handlers = {
-  [SERVICE_PACKET.CreatedServiceNotification]: {
-    handler: createServiceNotificationHandler,
+  [SERVICE_PACKET.ConnectedServiceNotification]: {
+    handler: connectedServiceNotificationHandler,
+  },
+  [SERVICE_PACKET.JoinSessionRequest]: {
+    handler: joinSessionHandler,
   },
 };
 

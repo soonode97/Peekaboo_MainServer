@@ -28,7 +28,17 @@ class TcpServer {
     // 서버를 생성
     this.server = net.createServer((socket) => {
       this.event.onConnection(socket);
-      socket.on('data', (data) => this.event.onData(socket, data));
+
+      if (
+        this.context.name === 'distributor' ||
+        this.context.name === 'gateway'
+      ) {
+        socket.on('data', (data) => this.event.onData(socket, data));
+      } else {
+        socket.on('data', (data) =>
+          this.event.onData(socket, this.clientToDistributor, data),
+        );
+      }
       socket.on('end', () => this.event.onEnd(socket));
       socket.on('error', (err) => this.event.onError(socket, err));
     });
