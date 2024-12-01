@@ -8,8 +8,6 @@ import bcrypt from 'bcrypt';
 
 export const loginRequestHandler = async (socket, clientKey, payload) => {
   try {
-    console.log('loginRequestHandler............');
-
     const { id, password } = payload;
     // DB 검증, ID / PASSWORD 검증
     const user = await userCommands.findUser(databaseManager, id);

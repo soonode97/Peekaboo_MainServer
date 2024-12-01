@@ -29,7 +29,6 @@ class GatewayServer extends TcpServer {
   // 각 서비스간 연결이 필요
   // 게이트웨이 mapClients에 연결된 노드 정보를 저장하는 함수
   onDistribute(data) {
-    console.log('onDistribute.........', data);
     for (let i in data) {
       const node = data[i];
       const key = node.host + ':' + node.port;
@@ -59,8 +58,6 @@ class GatewayServer extends TcpServer {
         client.connect();
       }
     }
-
-    console.log('mapClients: ', mapClients);
   }
 }
 

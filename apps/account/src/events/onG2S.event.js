@@ -12,7 +12,6 @@ class G2SEventHandler extends BaseEvent {
   }
 
   async onData(socket, data) {
-    console.log('Service가 게이트로부터 데이터를 받음..', data);
     socket.buffer = Buffer.concat([socket.buffer, data]);
 
     while (
@@ -22,16 +21,13 @@ class G2SEventHandler extends BaseEvent {
       let offset = 0;
       const packetType = socket.buffer.readUint16BE(offset);
       offset += config.header.client.typeLength;
-      console.log(packetType);
 
       const clientKeyLength = socket.buffer.readUInt8(offset);
       offset += config.header.client.clientKeyLength;
-      console.log(clientKeyLength);
 
       const clientKey = socket.buffer
         .subarray(offset, offset + clientKeyLength)
         .toString();
-      console.log(clientKey);
       offset += clientKeyLength;
 
       const totalHeaderLength =
@@ -45,7 +41,6 @@ class G2SEventHandler extends BaseEvent {
 
       const payloadLength = socket.buffer.readUint32BE(offset);
       offset += config.header.client.payloadLength;
-      console.log(payloadLength);
       const totalPacketLength = totalHeaderLength + payloadLength;
 
       if (socket.buffer.length < totalPacketLength) {
@@ -57,8 +52,7 @@ class G2SEventHandler extends BaseEvent {
       );
       offset += payloadLength;
       try {
-        console.error('!!!!!', payloadBuffer);
-        const payload = parsePacketG2S(payloadBuffer);
+        const payload = parsePacketG2S(packetType, payloadBuffer);
         socket.buffer = socket.buffer.subarray(offset);
 
         const handler = getHandlerByPacketType(packetType);

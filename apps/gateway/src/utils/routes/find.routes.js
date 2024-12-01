@@ -6,9 +6,7 @@ export const findRouterService = (packetType) => {
   const routingServiceName = routingTable[packetType];
 
   for (const [key, value] of Object.entries(mapClients)) {
-    // console.log(`라우팅 탐색중... ${key} : ${value.info}`);
     if (value.info.name === routingServiceName) {
-      // console.log('----라우팅서비스 찾음!----');
       return value.client;
     }
   }

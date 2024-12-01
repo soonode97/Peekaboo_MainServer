@@ -76,7 +76,6 @@ export const createPacketG2S = (
 
   const payloadLengthBuffer = Buffer.alloc(CLIENTS_HEADER.PAYLOAD_LENGTH);
   payloadLengthBuffer.writeUInt32BE(payloadLength);
-  console.log('payloadLength: ', payloadLength);
 
   return Buffer.concat([
     packetTypeBuffer,

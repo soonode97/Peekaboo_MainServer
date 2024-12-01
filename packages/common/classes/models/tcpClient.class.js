@@ -1,6 +1,4 @@
 import net from 'net';
-import config from '../../config/shared/index.js';
-import { parsePacketS2S } from '../../utils/packet/parse.packet.js';
 
 // 이건 마이크로서비스 Distributor에 등록될 TcpClient가 되기 위해 클래스화 한 것
 class TcpClient {
@@ -20,7 +18,7 @@ class TcpClient {
     this.onEnd = onEnd;
     this.onError = onError;
 
-    // Distributor를 여기에 저장
+    // Distributor 혹은 서비스를 여기에 저장
     this.client = null;
 
     // 버퍼를 받기 때문에 헤더/페이로드를 검증하는 절차가 필요하여 보내줘야함.
@@ -36,81 +34,22 @@ class TcpClient {
 
     // 데이터 수신 처리
     this.client.on('data', (data) => {
-      // 콜백으로 넘어가기 전 헤더와 페이로드 검증 필요
-      this.buffer = Buffer.concat([this.buffer, data]);
-
-      while (this.buffer.length >= config.header.service.typeLength) {
-        let offset = 0;
-        const packetType = this.buffer.readUint16BE(offset);
-        offset += config.header.service.typeLength;
-
-        const senderLength = this.buffer.readUInt8(offset);
-        offset += config.header.service.senderLength;
-
-        const sender = this.buffer
-          .subarray(offset, offset + senderLength)
-          .toString();
-        offset += senderLength;
-
-        const receiverLength = this.buffer.readUInt8(offset);
-        offset += config.header.service.receiverLength;
-
-        const receiver = this.buffer
-          .subarray(offset, offset + receiverLength)
-          .toString();
-        offset += receiverLength;
-
-        const payloadLength = this.buffer.readUint32BE(offset);
-        offset += config.header.service.payloadLength;
-
-        console.log(sender, receiver);
-
-        const totalPacketLength = offset + payloadLength;
-
-        if (this.buffer.length < totalPacketLength) {
-          break;
-        }
-        const payloadBuffer = this.buffer.subarray(
-          offset,
-          offset + payloadLength,
-        );
-        try {
-          console.log(packetType);
-
-          const payload = parsePacketS2S(payloadBuffer);
-
-          this.buffer = this.buffer.subarray(totalPacketLength);
-
-          const jsonData = {
-            packetType,
-            sender,
-            receiver,
-            payload,
-          };
-
-          console.log('jsonData: ', jsonData);
-          this.onRead(this.options, jsonData);
-        } catch (e) {
-          console.error(e);
-          process.exit(1);
-        }
-      }
+      this.onRead(this, data);
     });
 
     // 연결 종료 처리
     this.client.on('end', () => {
-      this.onEnd(this.options);
+      this.onEnd(this.client);
     });
 
     // 에러 처리
     this.client.on('error', (err) => {
-      this.onError(this.options, err);
+      this.onError(this.client, err);
     });
   }
 
   // Distributor로 데이터를 전송하는 메서드
   write(buffer) {
-    // console.log(`최종 보내는 Buffer: ${buffer}`);
     this.client.write(buffer);
   }
 }

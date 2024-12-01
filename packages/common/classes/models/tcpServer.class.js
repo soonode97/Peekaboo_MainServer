@@ -19,7 +19,6 @@ class TcpServer {
     // 연결된 Distributor
     this.clientToDistributor = null;
     this.onD2SEvent = new D2SEventHandler();
-    this.mapServices = {};
 
     this.initServer();
   }
@@ -42,10 +41,7 @@ class TcpServer {
     });
   }
 
-  // ---------- Distributor 부분 ------------
-  // Distributor에 접속하는 함수
-  // Distributor에 본인(노드)를 추가
-  // 인자로 distributor의 host, port 를 받아옴
+  // ---------- Distributor에 연결된 클라이언트 혹은 서비스에 연결된 게이트웨이의 클라이언트 부분 ------------
   connectToDistributor(host, port, notification) {
     this.clientToDistributor = new TcpClient(
       host,

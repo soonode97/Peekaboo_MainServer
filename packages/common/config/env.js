@@ -37,5 +37,3 @@ export const REDIS_PORT = process.env.REDIS_PORT || null;
 
 // AUTHENTICATION
 export const SECRET_KEY = process.env.SECRET_KEY;
-
-console.log('----------database host: ', DB_HOST, DB_PASSWORD, DB_USER);
