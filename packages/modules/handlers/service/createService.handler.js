@@ -1,7 +1,7 @@
 export const createServiceNotificationHandler = async (server, data) => {
   if (server.context.name === 'gateway') {
-    server.onDistribute(data.payload.microservices);
+    server.onDistribute(data.microservices);
   }
 
-  console.log('Distributor data: ', data.payload);
+  console.log('Distributor data: ', data);
 };

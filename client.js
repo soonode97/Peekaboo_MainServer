@@ -5,6 +5,7 @@ import path from 'path';
 import protobuf from 'protobufjs';
 import { fileURLToPath } from 'url';
 import { CLIENT_PACKET_MAPS } from './packages/modules/constants/packet/client.packet.js';
+import { CLIENT_PACKET } from './packages/modules/constants/packet/client.packet.js';
 
 export const packetNames = {
   common: {
@@ -18,7 +19,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
-const protoDir = path.join(__dirname, './packages/common/protobufs');
+const protoDir = path.join(__dirname, './packages/modules/protobufs');
 
 // 모든 프로토버프 파일을 읽는 함수
 export const GetAllProtoFiles = (dir, fileList = []) => {
@@ -70,17 +71,6 @@ export const LoadProtos = async () => {
 
 await LoadProtos();
 
-const CLIENT_PACKET = {
-  account: {
-    CreateUserRequest: 14,
-    CreateUserResponse: 15,
-    LoginRequest: 16,
-    LoginResponse: 17, // 응답 성공하면 로비에 진입
-  },
-};
-
-console.log(protoMessages);
-
 const header = {
   totalHeaderLengthExceptVersion: 11,
   typeLength: 2,
@@ -91,7 +81,7 @@ const header = {
 
 const gateOptions = {
   host: '0.0.0.0',
-  port: 6300,
+  port: 6000,
 };
 
 let sequence = 1;
@@ -109,11 +99,14 @@ const createPacket = (packetType, payload) => {
   const packet = {};
   packet[CLIENT_PACKET_MAPS[packetType]] = payload;
 
+  console.log(packet);
+
   const payloadBuffer = gamePacket.encode(packet).finish();
   const payloadLengthBuffer = Buffer.alloc(4);
 
-  payloadLengthBuffer.writeUInt32BE(payloadBuffer.length, 0);
-  console.log(payloadBuffer);
+  payloadLengthBuffer.writeUInt32BE(payloadBuffer.length);
+  console.log('페이로드: ', payloadBuffer);
+  console.log('만든 페이로드의 길이: ', payloadLengthBuffer);
 
   return Buffer.concat([
     packetTypeBuffer,
@@ -180,10 +173,8 @@ client.on('data', (data) => {
   console.log(`sequence: ${sequence}`);
   console.log(`payloadLength: ${payloadLength}`);
   console.log(`payloadBuffer: `, payloadBuffer);
-
-  const gamePacket = protoMessages.common.GamePacket;
-  const payloadData = gamePacket.decode(payloadBuffer);
-  console.log(`payload: ${JSON.stringify(payloadData)}`);
+  const payload = parsePacket(payloadBuffer);
+  console.log(`payload: `, payload);
 });
 
 // 연결 종료 처리
@@ -194,8 +185,8 @@ client.on('error', (err) => {});
 
 // 로그인 요청 확인
 const loginData = {
-  id: '1234',
-  password: '5678',
+  id: 'test3',
+  password: '1234',
 };
 
 const loginReqBuffer = createPacket(

@@ -8,8 +8,6 @@ export const routeG2SHandler = (
   payloadBuffer,
 ) => {
   try {
-    console.log('----------- 게이트가 클라이언트로 데이터 받음 -----------');
-    console.log(packetType, payloadLength, payloadBuffer);
     const clientKey = socket.remoteAddress + ':' + socket.remotePort;
     const routeBuffer = createPacketG2S(
       packetType,
@@ -17,11 +15,7 @@ export const routeG2SHandler = (
       payloadLength,
       payloadBuffer,
     );
-    console.log(routeBuffer);
     const routingClient = findRouterService(packetType);
-
-    console.log(routingClient);
-
     routingClient.write(routeBuffer);
   } catch (e) {
     console.error(e);

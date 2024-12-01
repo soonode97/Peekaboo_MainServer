@@ -16,7 +16,5 @@ export const getHandlerByPacketType = (packetType) => {
     console.error('Distributor에서 핸들러를 찾을 수 없음!');
     return false;
   }
-  console.log('Distributor 핸들러 찾음!');
-  console.log(handlers[packetType].handler);
   return handlers[packetType].handler;
 };

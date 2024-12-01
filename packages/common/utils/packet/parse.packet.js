@@ -21,10 +21,7 @@ export const parsePacketS2S = (packetType, payloadBuffer) => {
 
 // 게임 클라이언트가 보낸 페이로드에 대해 파싱하기 위한 함수
 export const parsePacketG2S = (packetType, payloadBuffer) => {
-  console.log('받은 버퍼: ', payloadBuffer);
   const protoMessages = getProtoMessages();
-
-  console.log('--------000--------');
   const packet = protoMessages.common.GamePacket;
 
   let payloadData;
@@ -33,8 +30,6 @@ export const parsePacketG2S = (packetType, payloadBuffer) => {
   } catch (e) {
     console.error(e);
   }
-
-  console.log('............', payloadData[CLIENT_PACKET_MAPS[packetType]]);
 
   return payloadData[CLIENT_PACKET_MAPS[packetType]];
 };

@@ -2,14 +2,15 @@ import BaseEvent from './base.events.js';
 import { SERVICE_PACKET } from '../../modules/constants/packet/service.packet.js';
 import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
 import { getHandlerByPacketType } from '../../modules/handlers/index.js';
+import SHARED_CONFIG from '../config/shared/index.js';
+import { parsePacketS2S } from '../utils/packet/parse.packet.js';
 
 class D2SEventHandler extends BaseEvent {
   onConnection(server) {
     console.log(
-      `Distributor connected from: ${server.clientToDistributor.options.host}:${server.clientToDistributor.options.port}`,
+      `${server.context.name}의 Client connected Distributor: ${server.clientToDistributor.options.host}:${server.clientToDistributor.options.port}`,
     );
     server.isConnectedDistributor = true;
-    console.log('이거 서비스 이름: ', server.context.name);
 
     // 서비스가 Distributor와 연결되었을 때 등록 요청을 보냄
     const registPacket = {
@@ -27,8 +28,63 @@ class D2SEventHandler extends BaseEvent {
   }
 
   async onData(server, data) {
-    const handler = getHandlerByPacketType(data.packetType);
-    await handler(server, data);
+    // 콜백으로 넘어가기 전 헤더와 페이로드 검증 필요
+    server.clientToDistributor.buffer = Buffer.concat([
+      server.clientToDistributor.buffer,
+      data,
+    ]);
+
+    while (
+      server.clientToDistributor.buffer.length >=
+      SHARED_CONFIG.header.service.typeLength
+    ) {
+      let offset = 0;
+      const packetType = server.clientToDistributor.buffer.readUint16BE(offset);
+      offset += SHARED_CONFIG.header.service.typeLength;
+
+      const senderLength = server.clientToDistributor.buffer.readUInt8(offset);
+      offset += SHARED_CONFIG.header.service.senderLength;
+
+      const sender = server.clientToDistributor.buffer
+        .subarray(offset, offset + senderLength)
+        .toString();
+      offset += senderLength;
+
+      const receiverLength =
+        server.clientToDistributor.buffer.readUInt8(offset);
+      offset += SHARED_CONFIG.header.service.receiverLength;
+
+      const receiver = server.clientToDistributor.buffer
+        .subarray(offset, offset + receiverLength)
+        .toString();
+      offset += receiverLength;
+
+      const payloadLength =
+        server.clientToDistributor.buffer.readUint32BE(offset);
+      offset += SHARED_CONFIG.header.service.payloadLength;
+
+      const totalPacketLength = offset + payloadLength;
+
+      if (server.clientToDistributor.buffer.length < totalPacketLength) {
+        break;
+      }
+      const payloadBuffer = server.clientToDistributor.buffer.subarray(
+        offset,
+        offset + payloadLength,
+      );
+      try {
+        const payload = parsePacketS2S(packetType, payloadBuffer);
+
+        server.clientToDistributor.buffer =
+          server.clientToDistributor.buffer.subarray(totalPacketLength);
+
+        const handler = getHandlerByPacketType(packetType);
+        await handler(server, payload);
+      } catch (e) {
+        console.error(e);
+        process.exit(1);
+      }
+    }
   }
 
   onEnd(server) {

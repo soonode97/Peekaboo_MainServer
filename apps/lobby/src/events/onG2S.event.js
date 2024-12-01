@@ -10,7 +10,6 @@ class G2SEventHandler extends BaseEvent {
   }
 
   async onData(socket, data) {
-    console.log('Service가 게이트로부터 데이터를 받음..');
     socket.buffer = Buffer.concat([socket.buffer, data]);
 
     while (socket.buffer.length >= config.header.service.typeLength) {
@@ -33,9 +32,8 @@ class G2SEventHandler extends BaseEvent {
       socket.buffer = socket.buffer.subarray(totalPacketLength);
 
       try {
+        // 여기 이제 새로운 패킷헤더로 바뀌어야 함.
         const payloadObj = JSON.parse(payload);
-
-        console.log(packetType);
 
         const handler = getHandlerByPacketType(packetType);
 
