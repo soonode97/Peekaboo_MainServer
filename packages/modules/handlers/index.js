@@ -1,4 +1,4 @@
-import { SERVICE_PACKET } from '../modules/constants/packet/service.packet.js';
+import { SERVICE_PACKET } from '../constants/packet/service.packet.js';
 import { createServiceNotificationHandler } from './service/createService.handler.js';
 
 export const handlers = {

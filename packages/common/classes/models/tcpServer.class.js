@@ -19,7 +19,6 @@ class TcpServer {
     // 연결된 Distributor
     this.clientToDistributor = null;
     this.onD2SEvent = new D2SEventHandler();
-    this.mapServices = {};
 
     this.initServer();
   }

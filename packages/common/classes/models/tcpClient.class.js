@@ -77,7 +77,7 @@ class TcpClient {
         try {
           console.log(packetType);
 
-          const payload = parsePacketS2S(payloadBuffer);
+          const payload = parsePacketS2S(packetType, payloadBuffer);
 
           this.buffer = this.buffer.subarray(totalPacketLength);
 
@@ -88,7 +88,7 @@ class TcpClient {
             payload,
           };
 
-          console.log('jsonData: ', jsonData);
+          console.log('Distributor가 보낸 jsonData: ', jsonData);
           this.onRead(this.options, jsonData);
         } catch (e) {
           console.error(e);

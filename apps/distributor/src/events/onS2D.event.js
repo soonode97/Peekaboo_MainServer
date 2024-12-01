@@ -10,7 +10,7 @@ class S2DEventHandler extends BaseEvent {
     console.log(
       `Client connected from: ${socket.remoteAddress}:${socket.remotePort}`,
     );
-    sendInfo(socket, '새로운 서비스가 등록되었습니다.');
+    sendInfo(socket);
     socket.buffer = Buffer.alloc(0);
   }
 
@@ -57,30 +57,29 @@ class S2DEventHandler extends BaseEvent {
       socket.buffer = socket.buffer.subarray(totalPacketLength);
 
       try {
-        console.log(packetType);
-
         const handler = getHandlerByPacketType(packetType);
 
-        const payload = parsePacketS2S(payloadBuffer);
+        const payload = parsePacketS2S(packetType, payloadBuffer);
+
+        console.log('Distributor가 받은 페이로드: ', payload);
 
         await handler(socket, payload);
       } catch (e) {
         console.error(e);
-        process.exit(1);
       }
     }
   }
 
   onEnd(socket) {
     const key = socket.remoteAddress + ':' + socket.remotePort;
-    console.log('onClose', socket.remoteAddress, socket.remotePort);
+    console.log('서비스 연결 끊김...', socket.remoteAddress, socket.remotePort);
     delete serviceMap[key];
     sendInfo();
   }
 
   onError(socket, err) {
     const key = socket.remoteAddress + ':' + socket.remotePort;
-    console.log('onClose', socket.remoteAddress, socket.remotePort);
+    console.log('서비스 연결 끊김...', socket.remoteAddress, socket.remotePort);
     delete serviceMap[key];
     sendInfo();
   }

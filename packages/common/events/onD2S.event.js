@@ -1,7 +1,7 @@
 import BaseEvent from './base.events.js';
 import { SERVICE_PACKET } from '../../modules/constants/packet/service.packet.js';
 import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
-import { getHandlerByPacketType } from '../../handlers/index.js';
+import { getHandlerByPacketType } from '../../modules/handlers/index.js';
 
 class D2SEventHandler extends BaseEvent {
   onConnection(server) {
