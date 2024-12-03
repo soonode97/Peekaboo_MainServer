@@ -2,6 +2,7 @@
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/distributor';
 import S2DEventHandler from './events/onS2D.event.js';
+import { handlers } from './handlers/index.js';
 
 class Distributor extends TcpServer {
   constructor() {
@@ -11,6 +12,8 @@ class Distributor extends TcpServer {
       config.distributor.port,
       new S2DEventHandler(),
     );
+
+    this.handlers = handlers;
   }
 }
 

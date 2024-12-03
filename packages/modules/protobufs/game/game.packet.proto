@@ -193,3 +193,71 @@ message S2C_ExtractSoulNotification {
 message S2C_DisconnectPlayerNotification {
   string userId = 1;
 }
+
+message C2S_EnterLobbyRequest {
+  uint32 userId = 1;
+}
+
+message S2C_EnterLobbyResponse {
+  repeated RoomInfo roomInfos = 1;
+}
+
+message C2S_UpdateSettingRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_UpdateSettingResponse {
+  uint32 dummyField = 1;
+}
+
+message C2S_EnterListOfRoomRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_EnterListOfRoomResponse {
+  uint32 dummyField = 1;
+}
+
+message C2S_RefreshListOfRoomRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_RefreshListOfRoomResponse {
+  uint32 dummyField = 1;
+}
+
+message C2S_FilterRoomByHostUserRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_FilterRoomByHostUserResponse {
+  uint32 dummyField = 1;
+}
+
+message C2S_SearchRoomRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_SearchRoomResponse {
+  uint32 dummyField = 1;
+}
+
+message C2S_CreateWaitingRoomRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_CreateWaitingRoomResponse {
+  uint32 dummyField = 1;
+}
+
+message S2C_CreateWaitingRoomNotification {
+  uint32 dummyField = 1;
+}
+
+message C2S_JoinWaitingRoomRequest {
+  uint32 dummyField = 1;
+}
+
+message S2C_JoinWaitingRoomResponse {
+  uint32 dummyField = 1;
+}

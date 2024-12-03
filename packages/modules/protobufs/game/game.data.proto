@@ -60,3 +60,15 @@ message ItemInfo {
   uint32 itemId = 1;
   uint32 itemTypeId = 2;
 }
+
+message ProfileInfo {
+  string userId =1;
+  string nickname = 2;
+  uint32 levelId = 3;
+}
+
+message RoomInfo {
+  string gameSessionId = 1;
+  string roomName = 2;
+  uint32 numberOfPlayer =3;
+}

@@ -1,5 +1,4 @@
 import config from '@peekaboo-ssr/config/distributor';
-import { getHandlerByPacketType } from '../handlers/index.js';
 import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
 import { sendInfo } from '../notifications/connection.notification.js';
 import { serviceMap } from '../source/connection.source.js';
@@ -15,7 +14,7 @@ class S2DEventHandler extends BaseEvent {
     socket.buffer = Buffer.alloc(0);
   }
 
-  async onData(socket, data) {
+  async onData(socket, data, server = null) {
     socket.buffer = Buffer.concat([socket.buffer, data]);
 
     while (socket.buffer.length >= config.header.service.typeLength) {
@@ -61,12 +60,10 @@ class S2DEventHandler extends BaseEvent {
 
         // 만약 receiverSocket이 없다면 Distributor가 목적지이거나 찾지 못한 것이니 Distributor 핸들링을 하도록 함.
         if (!receiverSocket) {
-          const handler = getHandlerByPacketType(packetType);
+          const handler = server.getServiceHandlerByPacketType(packetType);
           const payload = parsePacketS2S(packetType, payloadBuffer);
           await handler(socket, payload);
         } else {
-          console.log('--------------------');
-          console.log(buffer);
           receiverSocket.write(buffer);
         }
       } catch (e) {

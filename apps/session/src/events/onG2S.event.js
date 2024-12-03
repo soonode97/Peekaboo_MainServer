@@ -1,6 +1,5 @@
 import config from '@peekaboo-ssr/config/session';
 import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
-import { getHandlerByPacketType } from '../handlers/index.js';
 import { parsePacketG2S } from '@peekaboo-ssr/utils';
 
 class G2SEventHandler extends BaseEvent {
@@ -11,7 +10,7 @@ class G2SEventHandler extends BaseEvent {
     socket.buffer = Buffer.alloc(0);
   }
 
-  async onData(socket, distributorClient, data) {
+  async onData(socket, data, server) {
     socket.buffer = Buffer.concat([socket.buffer, data]);
 
     while (
@@ -55,9 +54,9 @@ class G2SEventHandler extends BaseEvent {
         const payload = parsePacketG2S(packetType, payloadBuffer);
         socket.buffer = socket.buffer.subarray(offset);
 
-        const handler = getHandlerByPacketType(packetType);
+        const handler = server.getClientHandlerByPacketType(packetType);
 
-        await handler(socket, clientKey, payload, distributorClient);
+        await handler(socket, clientKey, payload, server.clientToDistributor);
       } catch (e) {
         console.error(e);
       }

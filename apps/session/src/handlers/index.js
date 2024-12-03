@@ -1,11 +1,10 @@
-import config from '@peekaboo-ssr/config/session';
+import { findUserHandler } from './redis/findUser.handler.js';
 
-const handlers = {};
-
-export const getHandlerByPacketType = (packetType) => {
-  if (!handlers[packetType]) {
-    console.error('handler not found!!');
-    return false;
-  }
-  return handlers[packetType].handler;
+export const handlers = {
+  client: {},
+  pubsub: {
+    findUser: {
+      handler: findUserHandler,
+    },
+  },
 };

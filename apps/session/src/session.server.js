@@ -1,7 +1,9 @@
-// 로비 서버
+// 세션 서버
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/session';
 import G2SEventHandler from './events/onG2S.event.js';
+import redisManager from '@peekaboo-ssr/classes/RedisManager';
+import { handlers } from './handlers/index.js';
 
 class SessionServer extends TcpServer {
   constructor() {
@@ -13,6 +15,7 @@ class SessionServer extends TcpServer {
     );
 
     this.sessions = {};
+    this.handlers = handlers;
 
     this.connectToDistributor(
       config.distributor.host,

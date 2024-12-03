@@ -64,7 +64,7 @@ export const loginRequestHandler = async (
     // distributor를 통해 해당 세션 서비스에게 전달한다
     distributorClient.write(packetForService);
 
-    // 클라이언트에 보낼 페이로드
+    // 세션 등록 요청을 하고 클라에게 응답 전달
     const payloadDataForClient = {
       globalFailCode: 0,
       userId,

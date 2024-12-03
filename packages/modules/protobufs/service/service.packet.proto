@@ -47,3 +47,13 @@ message ExitSessionResponse {
   string uuid = 1;
   string message = 2; 
 }
+
+message FindUserRequest {
+  string clientKey = 1;
+  string sessionType = 2;
+}
+
+message FindUserResponse {
+  string uuid = 1;
+  string message = 2; 
+}

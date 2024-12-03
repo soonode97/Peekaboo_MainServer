@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { config } from '../../config/config.js';
+import config from '../../config/shared/index.js';
 
 class RedisManager {
   constructor() {

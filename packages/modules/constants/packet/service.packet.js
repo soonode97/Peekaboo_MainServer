@@ -7,6 +7,8 @@ export const SERVICE_PACKET = {
   JoinSessionResponse: 6,
   ExitSessionRequest: 7,
   ExitSessionResponse: 8,
+  FindUserRequest: 9,
+  FindUserResponse: 10,
 };
 
 export const SERVICE_PACKET_MAPS = {
@@ -19,4 +21,6 @@ export const SERVICE_PACKET_MAPS = {
   [SERVICE_PACKET.JoinSessionResponse]: 'joinSessionResponse',
   [SERVICE_PACKET.ExitSessionRequest]: 'exitSessionRequest',
   [SERVICE_PACKET.ExitSessionResponse]: 'exitSessionResponse',
+  [SERVICE_PACKET.FindUserRequest]: 'findUserRequest',
+  [SERVICE_PACKET.FindUserResponse]: 'findUserResponse',
 };

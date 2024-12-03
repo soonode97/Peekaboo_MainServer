@@ -45,8 +45,27 @@ message GamePacket {
     C2S_ExtractSoulRequest extractSoulRequest = 41;
     S2C_ExtractSoulNotification extractSoulNotification = 42;
     S2C_DisconnectPlayerNotification disconnectPlayerNotification = 43;
+
+    C2S_EnterLobbyRequest enterLobbyRequest = 501;
+    S2C_EnterLobbyResponse enterLobbyResponse = 502;
+    C2S_UpdateSettingRequest updateSettingRequest = 503;
+    S2C_UpdateSettingResponse updateSettingResponse = 504;
+    C2S_EnterListOfRoomRequest enterListOfRoomRequest = 505;
+    S2C_EnterListOfRoomResponse enterListOfRoomResponse = 506;
+    C2S_RefreshListOfRoomRequest refreshListOfRoomRequest = 507;
+    S2C_RefreshListOfRoomResponse refreshListOfRoomResponse = 508;
+    C2S_FilterRoomByHostUserRequest filterRoomByHostUserRequest = 509;
+    S2C_FilterRoomByHostUserResponse filterRoomByHostUserResponse = 510;
+    C2S_SearchRoomRequest searchRoomRequest = 511;
+    S2C_SearchRoomResponse searchRoomResponse = 512;
+    C2S_CreateWaitingRoomRequest createWaitingRoomRequest = 513;
+    S2C_CreateWaitingRoomResponse createWaitingRoomResponse = 514;
+    S2C_CreateWaitingRoomNotification createWaitingRoomNotification = 515;
+    C2S_JoinWaitingRoomRequest joinWaitingRoomRequest = 516;
+    S2C_JoinWaitingRoomResponse joinWaitingRoomResponse = 517;
   }
 }
+
 
 message ServicePacket {
   oneof payload {

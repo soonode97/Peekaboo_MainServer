@@ -4,6 +4,7 @@
 import net from 'net';
 import TcpClient from './tcpClient.class.js';
 import D2SEventHandler from '../../events/onD2S.event.js';
+import redisManager from '../managers/redis.manager.js';
 
 class TcpServer {
   constructor(name, host, port, event) {
@@ -18,9 +19,12 @@ class TcpServer {
     this.isConnectedDistributor = false;
     // 연결된 Distributor
     this.clientToDistributor = null;
+    this.redisClient = redisManager.client;
+    this.handlers = null;
     this.onD2SEvent = new D2SEventHandler();
 
     this.initServer();
+    this.initializePubSub();
   }
 
   // TCP 서버를 열고 초기화
@@ -33,11 +37,9 @@ class TcpServer {
         this.context.name === 'distributor' ||
         this.context.name === 'gateway'
       ) {
-        socket.on('data', (data) => this.event.onData(socket, data));
+        socket.on('data', (data) => this.event.onData(socket, data, this));
       } else {
-        socket.on('data', (data) =>
-          this.event.onData(socket, this.clientToDistributor, data),
-        );
+        socket.on('data', (data) => this.event.onData(socket, data, this));
       }
       socket.on('end', () => this.event.onEnd(socket));
       socket.on('error', (err) => this.event.onError(socket, err));
@@ -76,6 +78,50 @@ class TcpServer {
       }
     }, 3000);
   }
+
+  // PubSub 채널 구독 설정
+  initializePubSub() {
+    const subName = this.context.name;
+    this.redisClient.subscribe(`${subName}_service_request`, (error) => {
+      if (error) {
+        console.error(`${subName} Subscription Error: ${error.message}`);
+      } else {
+        console.log(`Subscribed to ${subName}_service_request channel`);
+      }
+    });
+
+    this.redisClient.on('message', (channel, message) => {
+      if (channel === `${subName}_service_request`) {
+        const data = JSON.parse(message);
+        const handler = this.getRedisHandler(data.action);
+        handler(this, data);
+      }
+    });
+  }
+
+  getRedisHandlerByMessage = (message) => {
+    if (!this.handlers.pubsub[message]) {
+      console.error('Redis handler not found!!');
+      return false;
+    }
+    return this.handlers.pubsub[message].handler;
+  };
+
+  getClientHandlerByPacketType = (packetType) => {
+    if (!this.handlers.client[packetType]) {
+      console.error('PacketType handler not found!!');
+      return false;
+    }
+    return this.handlers.client[packetType].handler;
+  };
+
+  getServiceHandlerByPacketType = (packetType) => {
+    if (!this.handlers.service[packetType]) {
+      console.error('PacketType handler not found!!');
+      return false;
+    }
+    return this.handlers.service[packetType].handler;
+  };
 }
 
 export default TcpServer;
