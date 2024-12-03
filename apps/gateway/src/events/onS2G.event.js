@@ -1,6 +1,6 @@
 import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
 import config from '@peekaboo-ssr/config/gateway';
-import { getSocketByRemote } from '../sessions/sessions.js';
+import { getSocketByClientKey } from '../sessions/sessions.js';
 import { sendPacketToClient } from '../utils/response/client.response.js';
 
 class S2GEventHandler extends BaseEvent {
@@ -56,7 +56,7 @@ class S2GEventHandler extends BaseEvent {
       try {
         socket.buffer = socket.buffer.subarray(offset);
         // 여기서 클라이언트를 찾아서 보내는 작업 하면 될 것 같음.
-        const client = getSocketByRemote(clientKey);
+        const client = getSocketByClientKey(clientKey);
 
         if (!client) {
           throw new Error('클라이언트를 찾을 수 없음!!');

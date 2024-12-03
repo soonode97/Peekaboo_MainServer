@@ -1,6 +1,7 @@
 import { SERVICE_PACKET } from '../constants/packet/service.packet.js';
 import { connectedServiceNotificationHandler } from './connection/connectService.handler.js';
 import { joinSessionHandler } from './session/joinSession.handler.js';
+import { exitSessionHandler } from './session/exitSession.handler.js';
 
 export const handlers = {
   [SERVICE_PACKET.ConnectedServiceNotification]: {
@@ -8,6 +9,9 @@ export const handlers = {
   },
   [SERVICE_PACKET.JoinSessionRequest]: {
     handler: joinSessionHandler,
+  },
+  [SERVICE_PACKET.DisconnectServiceRequest]: {
+    handler: exitSessionHandler,
   },
 };
 

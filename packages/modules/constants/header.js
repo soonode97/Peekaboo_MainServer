@@ -20,7 +20,7 @@
  * 3. 추후 packetType 앞에 목적지를 저장하여 구분하는 것도 방법
  */
 export const SERVICES_HEADER = {
-  TOTAL_HEADER_LENGTH: 26,
+  TOTAL_HEADER_LENGTH: 8,
   PACKET_TYPE_LENGTH: 2,
   SENDER_LENGTH: 1,
   RECEIVER_LENGTH: 1,

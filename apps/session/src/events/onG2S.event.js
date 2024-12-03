@@ -1,4 +1,4 @@
-import config from '@peekaboo-ssr/config/lobby';
+import config from '@peekaboo-ssr/config/session';
 import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
 import { getHandlerByPacketType } from '../handlers/index.js';
 import { parsePacketG2S } from '@peekaboo-ssr/utils';

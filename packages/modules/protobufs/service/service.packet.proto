@@ -30,6 +30,7 @@ message DisconnectedServiceNotification {
 message JoinSessionRequest {
   string uuid = 1;
   string type = 2;
+  string clientKey = 3;
 }
 
 message JoinSessionResponse {

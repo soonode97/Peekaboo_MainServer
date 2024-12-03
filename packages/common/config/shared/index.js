@@ -30,20 +30,20 @@ const SHARED_CONFIG = {
   },
   header: {
     service: {
-      totalHeaderLength: SERVICES_HEADER.TOTAL_HEADER_LENGTH,
-      typeLength: SERVICES_HEADER.PACKET_TYPE_LENGTH,
-      payloadLength: SERVICES_HEADER.PAYLOAD_LENGTH,
-      senderLength: SERVICES_HEADER.SENDER_LENGTH,
-      receiverLength: SERVICES_HEADER.RECEIVER_LENGTH,
+      totalHeaderLength: SERVICES_HEADER.TOTAL_HEADER_LENGTH, // 8
+      typeLength: SERVICES_HEADER.PACKET_TYPE_LENGTH, // 2
+      payloadLength: SERVICES_HEADER.PAYLOAD_LENGTH, // 4
+      senderLength: SERVICES_HEADER.SENDER_LENGTH, // 1
+      receiverLength: SERVICES_HEADER.RECEIVER_LENGTH, // 1
     },
     client: {
       totalHeaderLengthExceptVersion:
-        CLIENTS_HEADER.TOTAL_HEADER_LENGTH_EXCEPT_VERSION,
-      typeLength: CLIENTS_HEADER.PACKET_TYPE_LENGTH,
-      versionLength: CLIENTS_HEADER.VERSION_LENGTH,
-      sequenceLength: CLIENTS_HEADER.SEQUENCE_LENGTH,
-      payloadLength: CLIENTS_HEADER.PAYLOAD_LENGTH,
-      clientKeyLength: CLIENTS_HEADER.CLIENT_KEY_LENGTH,
+        CLIENTS_HEADER.TOTAL_HEADER_LENGTH_EXCEPT_VERSION, // 11
+      typeLength: CLIENTS_HEADER.PACKET_TYPE_LENGTH, // 2
+      versionLength: CLIENTS_HEADER.VERSION_LENGTH, // 1
+      sequenceLength: CLIENTS_HEADER.SEQUENCE_LENGTH, // 4
+      payloadLength: CLIENTS_HEADER.PAYLOAD_LENGTH, // 4
+      clientKeyLength: CLIENTS_HEADER.CLIENT_KEY_LENGTH, // 1
     },
   },
   databases: {
