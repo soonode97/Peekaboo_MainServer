@@ -10,7 +10,7 @@ export const handlers = {
   [SERVICE_PACKET.JoinSessionRequest]: {
     handler: joinSessionHandler,
   },
-  [SERVICE_PACKET.DisconnectServiceRequest]: {
+  [SERVICE_PACKET.ExitSessionRequest]: {
     handler: exitSessionHandler,
   },
 };
