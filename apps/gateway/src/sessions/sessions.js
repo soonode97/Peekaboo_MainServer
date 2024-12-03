@@ -1,8 +1,8 @@
 export const connectSessions = [];
 
-export const getSocketByRemote = (remote) => {
+export const getSocketByClientKey = (clientKey) => {
   const session = connectSessions.find(
-    (connection) => connection.remote == remote,
+    (connection) => connection.clientKey == clientKey,
   );
   return session.socket;
 };

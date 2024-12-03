@@ -51,6 +51,7 @@ export const loginRequestHandler = async (
     const payloadDataForService = {
       uuid: userId,
       type: 'user',
+      clientKey,
     };
 
     const packetForService = createPacketS2S(
@@ -60,6 +61,7 @@ export const loginRequestHandler = async (
       payloadDataForService,
     );
 
+    // distributor를 통해 해당 세션 서비스에게 전달한다
     distributorClient.write(packetForService);
 
     // 클라이언트에 보낼 페이로드

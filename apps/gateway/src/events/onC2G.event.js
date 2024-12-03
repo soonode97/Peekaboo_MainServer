@@ -9,7 +9,7 @@ class C2GEventHandler extends BaseEvent {
       `Game Client connected from: ${socket.remoteAddress}:${socket.remotePort}`,
     );
     connectSessions.push({
-      remote: `${socket.remoteAddress}:${socket.remotePort}`,
+      clientKey: `${socket.remoteAddress}:${socket.remotePort}`,
       socket: socket,
       sequence: 1,
     });
