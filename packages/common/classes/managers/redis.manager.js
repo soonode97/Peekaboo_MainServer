@@ -26,30 +26,6 @@ class RedisManager {
         retryStrategy: (times) => Math.min(times * 100, 2000),
       });
 
-      // Redis 연결 및 에러 핸들링
-      // this.publisherClient.on('error', (error) =>
-      //   console.error('Redis Publisher Error:', error),
-      // );
-      // this.subscriberClient.on('error', (error) =>
-      //   console.error('Redis Subscriber Error:', error),
-      // );
-
-      // this.publisherClient.on('connect', () =>
-      //   console.log('Connected to Redis Publisher'),
-      // );
-      // this.subscriberClient.on('connect', () =>
-      //   console.log('Connected to Redis Subscriber'),
-      // );
-
-      // this.client.on('error', (error) => console.error('Redis Error:', error));
-      // this.client.on('connect', () => console.log('Connected to Redis Cloud'));
-      // this.publisherClient.on('reconnecting', (times) =>
-      //   console.log(`Redis Publisher reconnecting... Attempt: ${times}`),
-      // );
-      // this.subscriberClient.on('reconnecting', (times) =>
-      //   console.log(`Redis Subscriber reconnecting... Attempt: ${times}`),
-      // );
-
       setupClientEvents(this.publisherClient, 'Publisher');
       setupClientEvents(this.subscriberClient, 'Subscriber');
       setupClientEvents(this.client, 'Default');
@@ -72,6 +48,7 @@ class RedisManager {
   }
 }
 
+// Redis 연결 및 에러 핸들링
 const setupClientEvents = (client, type) => {
   client.on('error', (error) => console.error(`Redis ${type} Error:`, error));
   client.on('connect', () => console.log(`Connected to Redis ${type}`));
