@@ -9,7 +9,8 @@
     "./TcpClient": "./models/tcpClient.class.js",
     "./TcpServer": "./models/tcpServer.class.js",
     "./DatabaseManager": "./managers/database.manager.js",
-    "./RedisManager": "./managers/redis.manager.js"
+    "./RedisManager": "./managers/redis.manager.js",
+    "./PubSubManager": "./managers/pubsub.manager.js"
   },
   "dependencies": {
     "ioredis": "^5.4.1",

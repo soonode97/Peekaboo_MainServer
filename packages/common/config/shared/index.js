@@ -2,6 +2,8 @@ import {
   CLIENTS_HEADER,
   SERVICES_HEADER,
 } from '../../../modules/constants/header.js';
+import { PUB_ACTION } from '../../../modules/constants/pubsub/action.pubsub.js';
+import { SUB_CHANNEL } from '../../../modules/constants/pubsub/channel.pubsub.js';
 import {
   DB1_NAME,
   DB2_NAME,
@@ -68,6 +70,8 @@ const SHARED_CONFIG = {
     port: REDIS_PORT,
     password: REDIS_PASSWORD,
   },
+  pubAction: PUB_ACTION,
+  subChannel: SUB_CHANNEL,
 };
 
 export default SHARED_CONFIG;

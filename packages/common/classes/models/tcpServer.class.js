@@ -4,7 +4,8 @@
 import net from 'net';
 import TcpClient from './tcpClient.class.js';
 import D2SEventHandler from '../../events/onD2S.event.js';
-import redisManager from '../managers/redis.manager.js';
+import RedisManager from '../managers/redis.manager.js';
+import PubSubManager from '../managers/pubsub.manager.js';
 
 class TcpServer {
   constructor(name, host, port, event) {
@@ -19,12 +20,15 @@ class TcpServer {
     this.isConnectedDistributor = false;
     // 연결된 Distributor
     this.clientToDistributor = null;
-    this.redisClient = redisManager.client;
+
     this.handlers = null;
     this.onD2SEvent = new D2SEventHandler();
 
+    this.redisManager = new RedisManager(); // RedisManager 인스턴스 생성
+    this.pubSubManager = new PubSubManager(this.redisManager); // PubSubManager 프로퍼티로 추가
+
     this.initServer();
-    this.initializePubSub();
+    this.initializeSubscriber();
   }
 
   // TCP 서버를 열고 초기화
@@ -79,32 +83,36 @@ class TcpServer {
     }, 3000);
   }
 
-  // PubSub 채널 구독 설정
-  initializePubSub() {
-    const subName = this.context.name;
-    this.redisClient.subscribe(`${subName}_service_request`, (error) => {
-      if (error) {
-        console.error(`${subName} Subscription Error: ${error.message}`);
+  initializeSubscriber() {
+    const requestChannel = `${this.context.name}_service_request`;
+
+    this.pubSubManager.subscriber.subscribe(requestChannel, (err) => {
+      if (err) {
+        console.error(`Error subscribing to ${requestChannel}:`, err);
       } else {
-        console.log(`Subscribed to ${subName}_service_request channel`);
+        console.log(`Subscribed to ${requestChannel}`);
       }
     });
 
-    this.redisClient.on('message', (channel, message) => {
-      if (channel === `${subName}_service_request`) {
-        const data = JSON.parse(message);
-        const handler = this.getRedisHandler(data.action);
-        handler(this, data);
+    this.pubSubManager.subscriber.on('message', (channel, message) => {
+      if (channel === requestChannel) {
+        try {
+          const data = JSON.parse(message);
+          const handler = this.getRedisHandlerByAction(data.action);
+          handler(this, data);
+        } catch (e) {
+          console.error(e);
+        }
       }
     });
   }
 
-  getRedisHandlerByMessage = (message) => {
-    if (!this.handlers.pubsub[message]) {
+  getRedisHandlerByAction = (action) => {
+    if (!this.handlers.pubsub[action]) {
       console.error('Redis handler not found!!');
       return false;
     }
-    return this.handlers.pubsub[message].handler;
+    return this.handlers.pubsub[action].handler;
   };
 
   getClientHandlerByPacketType = (packetType) => {
