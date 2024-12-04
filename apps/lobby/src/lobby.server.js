@@ -3,6 +3,8 @@ import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/lobby';
 import G2SEventHandler from './events/onG2S.event.js';
 import { handlers } from './handlers/index.js';
+import { Room } from './classes/models/room.class.js';
+import { rooms } from '../room/room.js';
 
 class LobbyServer extends TcpServer {
   constructor() {
@@ -18,6 +20,8 @@ class LobbyServer extends TcpServer {
         console.log('Distributor Notification: ', data);
       },
     );
+    rooms.push(new Room('tempId001', 'EXAMPLE'));
+    rooms.push(new Room('tempId002', 'EXAMPLE'));
   }
 }
 
