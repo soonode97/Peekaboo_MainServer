@@ -28,7 +28,6 @@ class D2SEventHandler extends BaseEvent {
   }
 
   async onData(server, data) {
-    console.log(server.context.name, '이 데이터를 받았어요~~', data);
     // 콜백으로 넘어가기 전 헤더와 페이로드 검증 필요
     server.clientToDistributor.buffer = Buffer.concat([
       server.clientToDistributor.buffer,
@@ -74,7 +73,6 @@ class D2SEventHandler extends BaseEvent {
       );
       try {
         const payload = parsePacketS2S(packetType, payloadBuffer);
-        console.log(server.context.name, '이 받은 페이로드입니다~~', payload);
 
         server.clientToDistributor.buffer =
           server.clientToDistributor.buffer.subarray(totalPacketLength);

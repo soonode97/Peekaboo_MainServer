@@ -15,7 +15,6 @@ class S2DEventHandler extends BaseEvent {
   }
 
   async onData(socket, data, server = null) {
-    console.log(`Distributor가 데이터를 받았어요~~`, data);
     socket.buffer = Buffer.concat([socket.buffer, data]);
 
     while (socket.buffer.length >= config.header.service.typeLength) {
@@ -63,7 +62,6 @@ class S2DEventHandler extends BaseEvent {
         if (!receiverSocket) {
           const handler = server.getServiceHandlerByPacketType(packetType);
           const payload = parsePacketS2S(packetType, payloadBuffer);
-          console.log(`Distributor가 받은 페이로드입니다~~ `, payload);
           await handler(socket, payload);
         } else {
           receiverSocket.write(buffer);
