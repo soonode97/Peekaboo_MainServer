@@ -1,12 +1,19 @@
+// 찾아서 무엇을 response로 줄건지?
 export const findUserHandler = (serverInstance, data) => {
-  console.log('findUser..........');
+  try {
+    console.log('findUser..........');
+    let resMessage = {
+      isSuccess: false,
+    };
 
-  const { sender, uuid, type, clientKey } = data;
-  const requestChannel = `${sender}_service_request`;
+    resMessage.isSuccess = true;
+    serverInstance.pubSubManager.publisher.publish(
+      data.responseChannel,
+      JSON.stringify(resMessage),
+    );
 
-  const session = serverInstance.getSessionsByType(type);
-
-  if (!session) {
-    serverInstance.redisClient.publish(requestChannel);
+    console.log(`Published response to ${responseChannel}:`, response);
+  } catch (e) {
+    console.error(e);
   }
 };

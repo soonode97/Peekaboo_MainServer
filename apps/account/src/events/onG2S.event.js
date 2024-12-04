@@ -56,7 +56,7 @@ class G2SEventHandler extends BaseEvent {
 
         const handler = server.getClientHandlerByPacketType(packetType);
 
-        await handler(socket, clientKey, payload, server.clientToDistributor);
+        await handler(socket, clientKey, payload, server);
       } catch (e) {
         console.error(e);
       }

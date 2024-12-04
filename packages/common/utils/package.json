@@ -9,6 +9,8 @@
   "exports": {
     ".": "./index.js",
     "./createPacket": "./packet/create.packet.js",
-    "./parsePacket": "./packet/parse.packet.js"
+    "./parsePacket": "./packet/parse.packet.js",
+    "./getRandomInt": "./math/random.math.js",
+    "./formatDate": "./format/date.format.js"
   }
 }

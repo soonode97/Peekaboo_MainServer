@@ -2,7 +2,6 @@
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/account';
 import G2SEventHandler from './events/onG2S.event.js';
-import redisManager from '@peekaboo-ssr/classes/RedisManager';
 import { handlers } from './handlers/index.js';
 
 class AccountServer extends TcpServer {

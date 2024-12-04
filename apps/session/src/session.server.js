@@ -2,7 +2,6 @@
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/session';
 import G2SEventHandler from './events/onG2S.event.js';
-import redisManager from '@peekaboo-ssr/classes/RedisManager';
 import { handlers } from './handlers/index.js';
 
 class SessionServer extends TcpServer {
@@ -14,7 +13,6 @@ class SessionServer extends TcpServer {
       new G2SEventHandler(),
     );
 
-    this.sessions = {};
     this.handlers = handlers;
 
     this.connectToDistributor(
@@ -25,10 +23,6 @@ class SessionServer extends TcpServer {
         console.log('Distributor Notification: ', data);
       },
     );
-  }
-
-  getSessionsByType(type) {
-    return this.sessions[type];
   }
 }
 

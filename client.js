@@ -174,7 +174,7 @@ client.on('data', (data) => {
   console.log(`payloadLength: ${payloadLength}`);
   console.log(`payloadBuffer: `, payloadBuffer);
   const payload = parsePacket(payloadBuffer);
-  console.log(`payload: `, payload);
+  console.log(`payload: `, JSON.stringify(payload));
 });
 
 // 연결 종료 처리
@@ -185,7 +185,7 @@ client.on('error', (err) => {});
 
 // 로그인 요청 확인
 const loginData = {
-  id: 'test5',
+  id: 'test6',
   password: '1234',
 };
 
@@ -194,6 +194,18 @@ const loginReqBuffer = createPacket(
   loginData,
 );
 
-console.log(loginReqBuffer);
+const enterLobbyData = {
+  userId: 'e3e3962d-795d-4428-8c60-d00bedb08149',
+};
 
+const enterLobbyReqBuffer = createPacket(
+  CLIENT_PACKET.lobby.EnterLobbyRequest,
+  enterLobbyData,
+);
+
+console.log(loginReqBuffer);
 client.write(loginReqBuffer);
+
+setTimeout(() => {
+  client.write(enterLobbyReqBuffer);
+}, 5000);

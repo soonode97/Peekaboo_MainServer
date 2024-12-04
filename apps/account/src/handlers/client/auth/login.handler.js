@@ -1,5 +1,5 @@
 import config from '@peekaboo-ssr/config/account';
-import { createPacketS2G, createPacketS2S } from '@peekaboo-ssr/utils';
+import { createPacketS2G } from '@peekaboo-ssr/utils';
 import databaseManager from '@peekaboo-ssr/classes/DatabaseManager';
 import userCommands from '@peekaboo-ssr/commands/userCommands';
 import jwt from 'jsonwebtoken';
@@ -10,10 +10,10 @@ export const loginRequestHandler = async (
   socket,
   clientKey,
   payload,
-  distributorClient,
+  server,
 ) => {
+  const { id, password } = payload;
   try {
-    const { id, password } = payload;
     // DB 검증, ID / PASSWORD 검증
     const user = await userCommands.findUser(databaseManager, id);
 
@@ -47,36 +47,45 @@ export const loginRequestHandler = async (
       expiresIn: config.jwt.expiresIn,
     });
 
-    // 세션 서비스에 보낼 유저 등록 페이로드
-    const payloadDataForService = {
-      uuid: userId,
-      type: 'user',
-      clientKey,
-    };
-
-    const packetForService = createPacketS2S(
-      config.servicePacket.JoinSessionRequest,
-      'account',
-      'session',
-      payloadDataForService,
-    );
-
-    // distributor를 통해 해당 세션 서비스에게 전달한다
-    distributorClient.write(packetForService);
-
-    // 세션 등록 요청을 하고 클라에게 응답 전달
     const payloadDataForClient = {
       globalFailCode: 0,
       userId,
       token,
     };
 
-    const packetForClient = createPacketS2G(
-      config.clientPacket.account.LoginResponse,
+    // 세션등록 Pub
+    const responseChannel = `join_session_${clientKey}`;
+    const messageForSession = {
+      action: config.pubAction.JoinSessionRequest,
+      responseChannel,
+      type: 'user',
       clientKey,
-      payloadDataForClient,
+      uuid: userId,
+    };
+
+    const response = await server.pubSubManager.sendAndWaitForResponse(
+      config.subChannel.session,
+      responseChannel,
+      messageForSession,
     );
-    socket.write(packetForClient);
+
+    if (response.isSuccess) {
+      // 세션 등록 요청을 하고 클라에게 응답 전달
+      const packetForClient = createPacketS2G(
+        config.clientPacket.account.LoginResponse,
+        clientKey,
+        payloadDataForClient,
+      );
+      socket.write(packetForClient);
+    } else {
+      payloadDataForClient.globalFailCode = 3;
+      const packetForClient = createPacketS2G(
+        config.clientPacket.account.LoginResponse,
+        clientKey,
+        payloadDataForClient,
+      );
+      socket.write(packetForClient);
+    }
   } catch (e) {
     console.error(e);
   }
