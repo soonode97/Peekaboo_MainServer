@@ -1,4 +1,4 @@
-import { ErrorCodesMaps } from './error.codes.js';
+import errorCodesMap from '@peekaboo-ssr/error/errorCodesMap';
 
 export const handleError = (error) => {
   let responseCode;
@@ -9,7 +9,7 @@ export const handleError = (error) => {
     console.error(`에러코드: ${responseCode}, 메세지: ${message}`);
   } else if (error.packetType) {
   } else {
-    responseCode = ErrorCodesMaps.SOCKET_ERROR.code;
+    responseCode = errorCodesMap.SOCKET_ERROR.code;
     message = error.message;
     console.error(`불분명 에러: ${message}`);
   }

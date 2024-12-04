@@ -1,9 +1,8 @@
-import {
-  CLIENTS_HEADER,
-  SERVICES_HEADER,
-} from '../../../modules/constants/header.js';
-import { PUB_ACTION } from '../../../modules/constants/pubsub/action.pubsub.js';
-import { SUB_CHANNEL } from '../../../modules/constants/pubsub/channel.pubsub.js';
+import clientHeader from '@peekaboo-ssr/modules-constants/clientHeader';
+import serviceHeader from '@peekaboo-ssr/modules-constants/serviceHeader';
+import pubAction from '@peekaboo-ssr/modules-constants/pubAction';
+import subChannel from '@peekaboo-ssr/modules-constants/subChannel';
+
 import {
   DB1_NAME,
   DB2_NAME,
@@ -18,7 +17,7 @@ import {
   DISTRIBUTOR_PORT,
   CLIENT_VERSION,
   SESSION_PORT,
-} from '../env.js';
+} from '@peekaboo-ssr/config/env';
 
 const SHARED_CONFIG = {
   version: CLIENT_VERSION,
@@ -31,22 +30,8 @@ const SHARED_CONFIG = {
     port: SESSION_PORT,
   },
   header: {
-    service: {
-      totalHeaderLength: SERVICES_HEADER.TOTAL_HEADER_LENGTH, // 8
-      typeLength: SERVICES_HEADER.PACKET_TYPE_LENGTH, // 2
-      payloadLength: SERVICES_HEADER.PAYLOAD_LENGTH, // 4
-      senderLength: SERVICES_HEADER.SENDER_LENGTH, // 1
-      receiverLength: SERVICES_HEADER.RECEIVER_LENGTH, // 1
-    },
-    client: {
-      totalHeaderLengthExceptVersion:
-        CLIENTS_HEADER.TOTAL_HEADER_LENGTH_EXCEPT_VERSION, // 11
-      typeLength: CLIENTS_HEADER.PACKET_TYPE_LENGTH, // 2
-      versionLength: CLIENTS_HEADER.VERSION_LENGTH, // 1
-      sequenceLength: CLIENTS_HEADER.SEQUENCE_LENGTH, // 4
-      payloadLength: CLIENTS_HEADER.PAYLOAD_LENGTH, // 4
-      clientKeyLength: CLIENTS_HEADER.CLIENT_KEY_LENGTH, // 1
-    },
+    service: serviceHeader,
+    client: clientHeader,
   },
   databases: {
     USER_DB: {
@@ -70,8 +55,8 @@ const SHARED_CONFIG = {
     port: REDIS_PORT,
     password: REDIS_PASSWORD,
   },
-  pubAction: PUB_ACTION,
-  subChannel: SUB_CHANNEL,
+  pubAction: pubAction,
+  subChannel: subChannel,
 };
 
 export default SHARED_CONFIG;

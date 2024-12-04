@@ -1,10 +1,11 @@
 {
-  "name": "peekaboo-mainserver",
+  "name": "peekaboo-msa",
   "private": true,
   "type": "module",
   "workspaces": [
     "apps/*",
-    "packages/common/*"
+    "packages/common/*",
+    "packages/modules/*"
   ],
   "scripts": {
     "start": "turbo run gateway:start",

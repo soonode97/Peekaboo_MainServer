@@ -1,4 +1,4 @@
-import { createPacketG2S } from '@peekaboo-ssr/utils';
+import { createPacketG2S } from '@peekaboo-ssr/utils/createPacket';
 import { findRouterService } from './find.routes.js';
 
 export const routeG2SHandler = (

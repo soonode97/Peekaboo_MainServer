@@ -1,8 +1,8 @@
-import { SERVICE_PACKET } from '../constants/packet/service.packet.js';
-import { connectedServiceNotificationHandler } from './connection/connectService.handler.js';
+import servicePacket from '@peekaboo-ssr/modules-constants/servicePacket';
+import { connectedServiceNotificationHandler } from '@peekaboo-ssr/modules-handlers/connection';
 
 export const handlers = {
-  [SERVICE_PACKET.ConnectedServiceNotification]: {
+  [servicePacket.ConnectedServiceNotification]: {
     handler: connectedServiceNotificationHandler,
   },
 };

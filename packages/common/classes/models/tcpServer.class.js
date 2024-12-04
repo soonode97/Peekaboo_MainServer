@@ -2,10 +2,10 @@
 // TCP 서버 서비스 노드를 생성시키고 각 데이터 송수신, 연결 수립, 연결 종료, 에러에 따른 행동을 정의
 
 import net from 'net';
-import TcpClient from './tcpClient.class.js';
-import D2SEventHandler from '../../events/onD2S.event.js';
-import RedisManager from '../managers/redis.manager.js';
-import PubSubManager from '../managers/pubsub.manager.js';
+import TcpClient from '@peekaboo-ssr/classes/TcpClient';
+import D2SEventHandler from '@peekaboo-ssr/events/D2SEvent';
+import RedisManager from '@peekaboo-ssr/classes/RedisManager';
+import PubSubManager from '@peekaboo-ssr/classes/PubSubManager';
 
 class TcpServer {
   constructor(name, host, port, event) {

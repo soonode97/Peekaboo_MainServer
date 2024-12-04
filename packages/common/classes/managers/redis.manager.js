@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import config from '../../config/shared/index.js';
+import config from '@peekaboo-ssr/config/shared';
 
 class RedisManager {
   constructor() {

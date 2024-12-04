@@ -1,12 +1,12 @@
 {
-  "name": "@peekaboo-ssr/events",
+  "name": "@peekaboo-ssr/protobufjs",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "build": "node esbuild.config.js"
   },
   "exports": {
-    "./BaseEvent": "./base.events.js",
-    "./D2SEvent": "./onD2S.event.js"
-  }
+    "./protoMessages": "./index.js"
+  },
+  "dependencies": {}
 }

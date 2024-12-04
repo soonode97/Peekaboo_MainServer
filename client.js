@@ -4,8 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import protobuf from 'protobufjs';
 import { fileURLToPath } from 'url';
-import { CLIENT_PACKET_MAPS } from './packages/modules/constants/packet/client.packet.js';
-import { CLIENT_PACKET } from './packages/modules/constants/packet/client.packet.js';
+import CLIENT_PACKET from './packages/modules/constants/packet/client.packet.js';
+import CLIENT_PACKET_MAPS from './packages/modules/constants/protoNames/client.proto.js';
 
 export const packetNames = {
   common: {
@@ -19,7 +19,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
-const protoDir = path.join(__dirname, './packages/modules/protobufs');
+const protoDir = path.join(__dirname, './packages/common/protobufs');
 
 // 모든 프로토버프 파일을 읽는 함수
 export const GetAllProtoFiles = (dir, fileList = []) => {

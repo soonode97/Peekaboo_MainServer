@@ -1,4 +1,4 @@
-export const PUB_ACTION = {
+const PUB_ACTION = {
   JoinSessionRequest: 1,
   JoinSessionResponse: 2,
   ExitSessionRequest: 3,
@@ -6,3 +6,5 @@ export const PUB_ACTION = {
   FindUserRequest: 5,
   FindUserResponse: 6,
 };
+
+export default PUB_ACTION;

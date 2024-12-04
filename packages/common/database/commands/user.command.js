@@ -1,4 +1,4 @@
-import { USER_SQL_QUERIES } from '../../../modules/database/queries/user.queries.js';
+import USER_SQL_QUERIES from '@peekaboo-ssr/modules-database/USER_QUERIES';
 
 const findUser = async (database, id) => {
   const [rows] = await database.pools.USER_DB.query(

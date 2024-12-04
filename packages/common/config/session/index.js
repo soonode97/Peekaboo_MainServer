@@ -1,10 +1,10 @@
-import { SERVICE_PACKET } from '../../../modules/constants/packet/service.packet.js';
-import { EC1_HOST, SESSION_PORT } from '../env.js';
-import SHARED_CONFIG from '../shared/index.js';
+import servicePacket from '@peekaboo-ssr/modules-constants/servicePacket';
+import { EC1_HOST, SESSION_PORT } from '@peekaboo-ssr/config/env';
+import SHARED_CONFIG from '@peekaboo-ssr/config/shared';
 
 const SESSION_CONFIG = {
   ...SHARED_CONFIG,
-  servicePacket: SERVICE_PACKET,
+  servicePacket,
   session: {
     host: EC1_HOST,
     port: SESSION_PORT,

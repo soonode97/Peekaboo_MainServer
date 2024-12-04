@@ -1,5 +1,5 @@
 // 서버에서 사용할 에러 코드들 정의
-export const ErrorCodesMaps = {
+const errorCodesMap = {
   SOCKET_ERROR: {
     code: 10000,
     message: '소켓 에러 발생',
@@ -77,3 +77,5 @@ export const ErrorCodesMaps = {
     message: '아이템 검증 오류',
   },
 };
+
+export default errorCodesMap;

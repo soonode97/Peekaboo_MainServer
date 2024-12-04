@@ -6,11 +6,13 @@
     "build": "node esbuild.config.js"
   },
   "exports": {
+    "./shared": "./shared/index.js",
     "./gateway": "./gateway/index.js",
     "./distributor": "./distributor/index.js",
     "./lobby": "./lobby/index.js",
     "./account": "./account/index.js",
-    "./session": "./session/index.js"
+    "./session": "./session/index.js",
+    "./env": "./env.js"
   },
   "dependencies": {
     "dotenv-flow": "^4.1.0"

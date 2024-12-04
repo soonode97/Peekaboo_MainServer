@@ -1,9 +1,9 @@
-import SHARED_CONFIG from '../shared/index.js';
-import { SERVICE_PACKET } from '../../../modules/constants/packet/service.packet.js';
+import SHARED_CONFIG from '@peekaboo-ssr/config/shared';
+import servicePacket from '@peekaboo-ssr/modules-constants/servicePacket';
 
 const DISTRIBUTOR_CONFIG = {
   ...SHARED_CONFIG,
-  servicePacket: SERVICE_PACKET,
+  servicePacket,
 };
 
 export default DISTRIBUTOR_CONFIG;

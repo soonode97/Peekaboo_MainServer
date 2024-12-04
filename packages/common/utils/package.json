@@ -7,7 +7,6 @@
     "build": "node esbuild.config.js"
   },
   "exports": {
-    ".": "./index.js",
     "./createPacket": "./packet/create.packet.js",
     "./parsePacket": "./packet/parse.packet.js",
     "./getRandomInt": "./math/random.math.js",

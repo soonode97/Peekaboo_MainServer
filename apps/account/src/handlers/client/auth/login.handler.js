@@ -1,5 +1,5 @@
 import config from '@peekaboo-ssr/config/account';
-import { createPacketS2G } from '@peekaboo-ssr/utils';
+import { createPacketS2G } from '@peekaboo-ssr/utils/createPacket';
 import databaseManager from '@peekaboo-ssr/classes/DatabaseManager';
 import userCommands from '@peekaboo-ssr/commands/userCommands';
 import jwt from 'jsonwebtoken';

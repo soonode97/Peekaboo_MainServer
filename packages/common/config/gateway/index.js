@@ -1,12 +1,12 @@
-import { CLIENT_PACKET } from '../../../modules/constants/packet/client.packet.js';
-import { SERVICE_PACKET } from '../../../modules/constants/packet/service.packet.js';
-import { EC1_HOST, GATEWAY_PORT, SECRET_KEY } from '../env.js';
-import SHARED_CONFIG from '../shared/index.js';
+import clientPacket from '@peekaboo-ssr/modules-constants/clientPacket';
+import servicePacket from '@peekaboo-ssr/modules-constants/servicePacket';
+import { EC1_HOST, GATEWAY_PORT, SECRET_KEY } from '@peekaboo-ssr/config/env';
+import SHARED_CONFIG from '@peekaboo-ssr/config/shared';
 
 const GATEWAY_CONFIG = {
   ...SHARED_CONFIG,
-  clientPacket: CLIENT_PACKET,
-  servicePacket: SERVICE_PACKET,
+  clientPacket,
+  servicePacket,
   gateway: {
     host: EC1_HOST,
     port: GATEWAY_PORT,

@@ -1,4 +1,4 @@
-export const CLIENT_PACKET = {
+const CLIENT_PACKET = {
   account: {
     LoginRequest: 16,
     LoginResponse: 17, // 응답 성공하면 로비에 진입
@@ -26,29 +26,4 @@ export const CLIENT_PACKET = {
   },
 };
 
-export const CLIENT_PACKET_MAPS = {
-  [CLIENT_PACKET.account.CreateUserRequest]: 'createUserRequest',
-  [CLIENT_PACKET.account.CreateUserResponse]: 'createUserResponse',
-  [CLIENT_PACKET.account.LoginRequest]: 'loginRequest',
-  [CLIENT_PACKET.account.LoginResponse]: 'loginResponse',
-  [CLIENT_PACKET.lobby.EnterLobbyRequest]: 'enterLobbyRequest',
-  [CLIENT_PACKET.lobby.EnterLobbyResponse]: 'enterLobbyResponse',
-  [CLIENT_PACKET.lobby.UpdateSettingRequest]: 'updateSettingRequest',
-  [CLIENT_PACKET.lobby.UpdateSettingResponse]: 'updateSettingResponse',
-  [CLIENT_PACKET.lobby.EnterListOfRoomRequest]: 'enterListOfRoomRequest',
-  [CLIENT_PACKET.lobby.EnterListOfRoomResponse]: 'enterListOfRoomResponse',
-  [CLIENT_PACKET.lobby.RefreshListOfRoomRequest]: 'refreshListOfRoomRequest',
-  [CLIENT_PACKET.lobby.RefreshListOfRoomResponse]: 'refreshListOfRoomResponse',
-  [CLIENT_PACKET.lobby.FilterRoomByHostUserRequest]:
-    'filterRoomByHostUserRequest',
-  [CLIENT_PACKET.lobby.FilterRoomByHostUserResponse]:
-    'filterRoomByHostUserResponse',
-  [CLIENT_PACKET.lobby.SearchRoomRequest]: 'searchRoomRequest',
-  [CLIENT_PACKET.lobby.SearchRoomResponse]: 'searchRoomResponse',
-  [CLIENT_PACKET.lobby.CreateWaitingRoomRequest]: 'createWaitingRoomRequest',
-  [CLIENT_PACKET.lobby.CreateWaitingRoomResponse]: 'createWaitingRoomResponse',
-  [CLIENT_PACKET.lobby.CreateWaitingRoomNotification]:
-    'createWaitingRoomNotification',
-  [CLIENT_PACKET.lobby.JoinWaitingRoomRequest]: 'joinWaitingRoomRequest',
-  [CLIENT_PACKET.lobby.JoinWaitingRoomResponse]: 'joinWaitingRoomResponse',
-};
+export default CLIENT_PACKET;

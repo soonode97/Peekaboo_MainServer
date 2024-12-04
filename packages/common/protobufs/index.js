@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import protobuf from 'protobufjs';
 
-export const packetNames = {
+const packetNames = {
   common: {
     GamePacket: 'common.GamePacket',
     ServicePacket: 'common.ServicePacket',
@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const protoDir = path.join(__dirname, '../protobufs');
 
-export const getAllProtoFiles = (dir, fileList = []) => {
+const getAllProtoFiles = (dir, fileList = []) => {
   const files = fs.readdirSync(dir);
 
   files.forEach((file) => {
@@ -39,7 +39,7 @@ const protoFiles = getAllProtoFiles(protoDir);
 
 const protoMessages = {};
 
-export const loadProtos = async () => {
+const loadProtos = async () => {
   try {
     const root = new protobuf.Root();
 
@@ -59,8 +59,6 @@ export const loadProtos = async () => {
   }
 };
 
-export const getProtoMessages = () => {
-  return { ...protoMessages };
-};
-
 await loadProtos();
+
+export default protoMessages;

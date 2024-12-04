@@ -1,9 +1,9 @@
-import BaseEvent from './base.events.js';
-import { SERVICE_PACKET } from '../../modules/constants/packet/service.packet.js';
+import BaseEvent from '@peekaboo-ssr/events/BaseEvent';
+import servicePacket from '@peekaboo-ssr/modules-constants/servicePacket';
+import serviceHeader from '@peekaboo-ssr/modules-constants/serviceHeader';
 import { createPacketS2S } from '@peekaboo-ssr/utils/createPacket';
-import { getHandlerByPacketType } from '../../modules/handlers/index.js';
-import SHARED_CONFIG from '../config/shared/index.js';
-import { parsePacketS2S } from '../utils/packet/parse.packet.js';
+import { getHandlerByPacketType } from '@peekaboo-ssr/modules-handlers/index';
+import { parsePacketS2S } from '@peekaboo-ssr/utils/parsePacket';
 
 class D2SEventHandler extends BaseEvent {
   onConnection(server) {
@@ -19,7 +19,7 @@ class D2SEventHandler extends BaseEvent {
       name: server.context.name,
     };
     const buffer = createPacketS2S(
-      SERVICE_PACKET.ConnectServiceRequest,
+      servicePacket.ConnectServiceRequest,
       server.context.name,
       'distributor',
       registPacket,
@@ -28,6 +28,7 @@ class D2SEventHandler extends BaseEvent {
   }
 
   async onData(server, data) {
+    console.log(server.context.name, '이 데이터를 받았어요~~', data);
     // 콜백으로 넘어가기 전 헤더와 페이로드 검증 필요
     server.clientToDistributor.buffer = Buffer.concat([
       server.clientToDistributor.buffer,
@@ -35,15 +36,14 @@ class D2SEventHandler extends BaseEvent {
     ]);
 
     while (
-      server.clientToDistributor.buffer.length >=
-      SHARED_CONFIG.header.service.typeLength
+      server.clientToDistributor.buffer.length >= serviceHeader.typeLength
     ) {
       let offset = 0;
       const packetType = server.clientToDistributor.buffer.readUint16BE(offset);
-      offset += SHARED_CONFIG.header.service.typeLength;
+      offset += serviceHeader.typeLength;
 
       const senderLength = server.clientToDistributor.buffer.readUInt8(offset);
-      offset += SHARED_CONFIG.header.service.senderLength;
+      offset += serviceHeader.senderLength;
 
       const sender = server.clientToDistributor.buffer
         .subarray(offset, offset + senderLength)
@@ -52,7 +52,7 @@ class D2SEventHandler extends BaseEvent {
 
       const receiverLength =
         server.clientToDistributor.buffer.readUInt8(offset);
-      offset += SHARED_CONFIG.header.service.receiverLength;
+      offset += serviceHeader.receiverLength;
 
       const receiver = server.clientToDistributor.buffer
         .subarray(offset, offset + receiverLength)
@@ -61,7 +61,7 @@ class D2SEventHandler extends BaseEvent {
 
       const payloadLength =
         server.clientToDistributor.buffer.readUint32BE(offset);
-      offset += SHARED_CONFIG.header.service.payloadLength;
+      offset += serviceHeader.payloadLength;
 
       const totalPacketLength = offset + payloadLength;
 
@@ -74,6 +74,7 @@ class D2SEventHandler extends BaseEvent {
       );
       try {
         const payload = parsePacketS2S(packetType, payloadBuffer);
+        console.log(server.context.name, '이 받은 페이로드입니다~~', payload);
 
         server.clientToDistributor.buffer =
           server.clientToDistributor.buffer.subarray(totalPacketLength);
