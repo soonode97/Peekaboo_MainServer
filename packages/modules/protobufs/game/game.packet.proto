@@ -195,7 +195,7 @@ message S2C_DisconnectPlayerNotification {
 }
 
 message C2S_EnterLobbyRequest {
-  uint32 userId = 1;
+  string userId = 1;
 }
 
 message S2C_EnterLobbyResponse {
