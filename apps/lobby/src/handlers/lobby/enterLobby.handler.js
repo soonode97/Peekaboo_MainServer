@@ -1,6 +1,5 @@
 import config from '@peekaboo-ssr/config/lobby';
 import { createPacketS2G } from '@peekaboo-ssr/utils/createPacket';
-import { getRandomInt } from '@peekaboo-ssr/utils/getRandomInt';
 import { rooms } from '../../../room/room.js';
 
 export const enterLobbyHandler = async (socket, clientKey, payload, server) => {
@@ -8,8 +7,8 @@ export const enterLobbyHandler = async (socket, clientKey, payload, server) => {
     const { userId } = payload;
     console.log('enterLobby.............');
 
-    const randomInt = getRandomInt(0, 1000000);
-    const responseChannel = `enter_lobby_session_${clientKey}_${randomInt}`;
+    const responseChannel = `enter_lobby_session_${clientKey}_${Date.now()}`;
+
     const messageForSession = {
       action: config.pubAction.JoinSessionRequest,
       responseChannel,

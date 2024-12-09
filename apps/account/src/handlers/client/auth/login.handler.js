@@ -52,9 +52,8 @@ export const loginRequestHandler = async (
       userId,
       token,
     };
-
     // 세션등록 Pub
-    const responseChannel = `join_session_${clientKey}`;
+    const responseChannel = `join_session_${clientKey}_${Date.now()}`;
     const messageForSession = {
       action: config.pubAction.JoinSessionRequest,
       responseChannel,
