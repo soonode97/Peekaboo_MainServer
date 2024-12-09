@@ -5,6 +5,7 @@ import G2SEventHandler from './events/onG2S.event.js';
 import { handlers } from './handlers/index.js';
 import { Room } from './classes/models/room.class.js';
 import { rooms } from '../room/room.js';
+import cluster from 'cluster';
 
 class LobbyServer extends TcpServer {
   constructor() {
@@ -24,5 +25,13 @@ class LobbyServer extends TcpServer {
     rooms.push(new Room('tempId002', 'EXAMPLE'));
   }
 }
+if (cluster.isPrimary) {
+  cluster.fork();
 
-new LobbyServer();
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork();
+  });
+} else {
+  new LobbyServer();
+}

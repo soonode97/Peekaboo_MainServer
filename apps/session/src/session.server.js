@@ -3,6 +3,7 @@ import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/session';
 import G2SEventHandler from './events/onG2S.event.js';
 import { handlers } from './handlers/index.js';
+import cluster from 'cluster';
 
 class SessionServer extends TcpServer {
   constructor() {
@@ -25,5 +26,13 @@ class SessionServer extends TcpServer {
     );
   }
 }
+if (cluster.isPrimary) {
+  cluster.fork();
 
-new SessionServer();
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork();
+  });
+} else {
+  new SessionServer();
+}

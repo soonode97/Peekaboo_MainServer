@@ -3,6 +3,7 @@ import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/account';
 import G2SEventHandler from './events/onG2S.event.js';
 import { handlers } from './handlers/index.js';
+import cluster from 'cluster';
 
 class AccountServer extends TcpServer {
   constructor() {
@@ -26,4 +27,13 @@ class AccountServer extends TcpServer {
   }
 }
 
-new AccountServer();
+if (cluster.isPrimary) {
+  cluster.fork();
+
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork();
+  });
+} else {
+  new AccountServer();
+}

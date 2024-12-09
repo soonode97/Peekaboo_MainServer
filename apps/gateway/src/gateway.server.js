@@ -4,6 +4,7 @@ import C2GEventHandler from './events/onC2G.event.js';
 import S2GEventHandler from './events/onS2G.event.js';
 import config from '@peekaboo-ssr/config/gateway';
 import { mapClients } from './source/router.source.js';
+import cluster from 'cluster';
 
 class GatewayServer extends TcpServer {
   constructor() {
@@ -61,4 +62,13 @@ class GatewayServer extends TcpServer {
   }
 }
 
-new GatewayServer();
+if (cluster.isPrimary) {
+  cluster.fork();
+
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork();
+  });
+} else {
+  new GatewayServer();
+}
