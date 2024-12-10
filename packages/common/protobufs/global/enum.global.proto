@@ -3,31 +3,42 @@ syntax = "proto3";
 package global;
 
 enum GlobalFailCode {
-    NONE = 0;
-    UNKNOWN = 1;
-    INVALID_REQUEST = 2;
-    AUTHENTICATION_FAILED = 3;
+  NONE = 0;
+  UNKNOWN = 1;
+  INVALID_REQUEST = 2;
+  AUTHENTICATION_FAILED = 3;
 }
 
 enum UserState {
-    STAY = 0;
-    INGAME = 1;
+  USER_STATE_NONE = 0;
+  STAY = 1;
+  INGAME = 2;
 }
 
 enum GameSessionState {
-    PREPARE = 0;
-    INPROGRESS = 1;
-    END = 2;
+  GAME_STATE_NONE = 0;
+  PREPARE = 1;
+  INPROGRESS = 2;
+  END = 3;
 }
 
 enum CharacterState {
-    IDLE = 1;
-    MOVE = 2;
-    RUN = 3;
-    JUMP = 4;
-    ATTACK = 5;
-    DIED = 6;
-    HIT = 7;
-    COOLDOWN = 8;
-    SHOUT = 9;
+  CHARACTER_STATE_NONE = 0;
+  IDLE = 1;
+  MOVE = 2;
+  RUN = 3;
+  JUMP = 4;
+  ATTACK = 5;
+  DIED = 6;
+  HIT = 7;
+  COOLDOWN = 8;
+  SHOUT = 9;
+  EXIT = 10;
+}
+
+enum DoorState {
+  DOOR_STATE_NONE = 0;
+  DOOR_LEFT = 1;
+  DOOR_MIDDLE = 2;
+  DOOR_RIGHT = 3;
 }

@@ -1,5 +1,6 @@
-
 syntax = "proto3";
+
+import '../game/game.packet.proto';
 
 package common;
 
@@ -17,8 +18,6 @@ message GamePacket {
     S2C_GhostStateChangeNotification ghostStateChangeNotification = 10;
     C2S_ItemChangeRequest itemChangeRequest = 11;
     S2C_ItemChangeNotification itemChangeNotification = 12;
-    C2S_LoginRequest loginRequest = 16;
-    S2C_LoginResponse loginResponse = 17;
     C2S_CreateRoomRequest createRoomRequest = 18;
     S2C_CreateRoomResponse createRoomResponse = 19;
     C2S_JoinRoomRequest joinRoomRequest = 20;
@@ -45,24 +44,34 @@ message GamePacket {
     C2S_ExtractSoulRequest extractSoulRequest = 41;
     S2C_ExtractSoulNotification extractSoulNotification = 42;
     S2C_DisconnectPlayerNotification disconnectPlayerNotification = 43;
+    C2S_GhostSpecialStateRequest ghostSpecialStateRequest = 44;
+    S2C_GhostSpecialStateNotification ghostSpecialStateNotification = 45;
+    S2C_ItemDeleteNotification itemDeleteNotification = 46;
+    C2S_ItemDisuseRequest itemDisuseRequest = 47;
+    S2C_ItemDisuseNotification itemDisuseNotification = 48;
+    C2S_ItemCreateRequest itemCreateRequest = 49;
+    S2C_ItemCreateNotification itemCreateNotification = 50;
+    S2C_BlockInteractionNotification blockInteractionNotification = 51;
+    C2S_GhostSpawnRequest ghostSpawnRequest = 52;
+    S2C_GhostSpawnNotification ghostSpawnNotification = 53;
+    S2C_ItemGetNotification itemGetNotification = 54;
+    S2C_RemainingTimeNotification remainingTimeNotification = 55;
+    C2S_ItemPurchaseRequest itemPurchaseRequest = 56;
+    S2C_ItemPurchaseNotification itemPurchaseNotification = 57;
+    S2C_ItemPurchaseResponse itemPurchaseResponse = 58;
 
-    C2S_EnterLobbyRequest enterLobbyRequest = 501;
-    S2C_EnterLobbyResponse enterLobbyResponse = 502;
-    C2S_UpdateSettingRequest updateSettingRequest = 503;
-    S2C_UpdateSettingResponse updateSettingResponse = 504;
-    C2S_EnterListOfRoomRequest enterListOfRoomRequest = 505;
-    S2C_EnterListOfRoomResponse enterListOfRoomResponse = 506;
-    C2S_RefreshListOfRoomRequest refreshListOfRoomRequest = 507;
-    S2C_RefreshListOfRoomResponse refreshListOfRoomResponse = 508;
-    C2S_FilterRoomByHostUserRequest filterRoomByHostUserRequest = 509;
-    S2C_FilterRoomByHostUserResponse filterRoomByHostUserResponse = 510;
-    C2S_SearchRoomRequest searchRoomRequest = 511;
-    S2C_SearchRoomResponse searchRoomResponse = 512;
-    C2S_CreateWaitingRoomRequest createWaitingRoomRequest = 513;
-    S2C_CreateWaitingRoomResponse createWaitingRoomResponse = 514;
-    S2C_CreateWaitingRoomNotification createWaitingRoomNotification = 515;
-    C2S_JoinWaitingRoomRequest joinWaitingRoomRequest = 516;
-    S2C_JoinWaitingRoomResponse joinWaitingRoomResponse = 517;
+    C2S_RegistAccountRequest registAccountRequest = 500;
+    S2C_RegistAccountResponse registAccountResponse = 501;
+    C2S_LoginRequest loginRequest = 502;
+    S2C_LoginResponse loginResponse = 503;
+    C2S_ChangeNicknameRequest changeNicknameRequest = 504;
+    S2C_ChangeNicknameResponse changeNicknameResponse = 505;
+    C2S_EnterLobbyRequest enterLobbyRequest = 506;
+    S2C_EnterLobbyResponse enterLobbyResponse = 507;
+    C2S_RefreshLobbyRequest refreshLobbyRequest = 508;
+    S2C_RefreshLobbyResponse refreshLobbyResponse = 509;
+    C2S_SearchRoomRequest searchRoomRequest = 510;
+    S2C_SearchRoomResponse searchRoomResponse = 511;
   }
 }
 
