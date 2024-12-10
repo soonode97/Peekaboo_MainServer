@@ -1,11 +1,11 @@
 import path from 'path';
-import dotenvFlow from 'dotenv-flow';
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenvFlow.config({
-  path: path.resolve(__dirname, '../../..'),
+dotenv.config({
+  path: path.resolve(__dirname, '.env'),
 });
 
 // SERVER HOST
