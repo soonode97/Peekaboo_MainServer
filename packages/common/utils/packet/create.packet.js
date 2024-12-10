@@ -125,7 +125,7 @@ export const createPacketG2C = (packetType, payloadBuffer, sequence) => {
   typeBuffer.writeUInt16BE(packetType);
 
   const versionLengthBuffer = Buffer.alloc(clientHeader.versionLength);
-  versionLengthBuffer.writeUint8(clientHeader.versionLength);
+  versionLengthBuffer.writeUint8(config.version.length);
 
   const versionString = config.version;
   const versionBuffer = Buffer.from(versionString, 'utf-8');
