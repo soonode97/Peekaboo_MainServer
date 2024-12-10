@@ -1,6 +1,8 @@
 // 로비 서버
 import TcpServer from '@peekaboo-ssr/classes/TcpServer';
 import config from '@peekaboo-ssr/config/lobby';
+import RedisManager from '@peekaboo-ssr/classes/RedisManager';
+import PubSubManager from '@peekaboo-ssr/classes/PubSubManager';
 import G2SEventHandler from './events/onG2S.event.js';
 import { handlers } from './handlers/index.js';
 import { Room } from './classes/models/room.class.js';
@@ -12,6 +14,10 @@ class LobbyServer extends TcpServer {
     super('lobby', config.lobby.host, config.lobby.port, new G2SEventHandler());
 
     this.handlers = handlers;
+
+    this.redisManager = new RedisManager(); // RedisManager 인스턴스 생성
+    this.pubSubManager = new PubSubManager(this.redisManager); // PubSubManager 프로퍼티로 추가
+    this.initializeSubscriber();
 
     this.connectToDistributor(
       config.distributor.host,

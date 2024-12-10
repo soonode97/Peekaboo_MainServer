@@ -4,8 +4,6 @@
 import net from 'net';
 import TcpClient from '@peekaboo-ssr/classes/TcpClient';
 import D2SEventHandler from '@peekaboo-ssr/events/D2SEvent';
-import RedisManager from '@peekaboo-ssr/classes/RedisManager';
-import PubSubManager from '@peekaboo-ssr/classes/PubSubManager';
 
 class TcpServer {
   constructor(name, host, port, event) {
@@ -24,11 +22,7 @@ class TcpServer {
     this.handlers = null;
     this.onD2SEvent = new D2SEventHandler();
 
-    this.redisManager = new RedisManager(); // RedisManager 인스턴스 생성
-    this.pubSubManager = new PubSubManager(this.redisManager); // PubSubManager 프로퍼티로 추가
-
     this.initServer();
-    this.initializeSubscriber();
   }
 
   // TCP 서버를 열고 초기화
