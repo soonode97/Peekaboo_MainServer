@@ -1,15 +1,13 @@
 const CLIENT_PACKET = {
   account: {
-    LoginRequest: 16,
-    LoginResponse: 17, // 응답 성공하면 로비에 진입
-  },
-  lobby: {
     RegistAccountRequest: 500,
     RegistAccountResponse: 501,
     LoginRequest: 502,
     LoginResponse: 503,
     ChangeNicknameRequest: 504,
     ChangeNicknameResponse: 505,
+  },
+  lobby: {
     EnterLobbyRequest: 506,
     EnterLobbyResponse: 507,
     RefreshLobbyRequest: 508,
